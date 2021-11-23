@@ -2,16 +2,15 @@ import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
 
+const test = async () => {
+  var res = await fetch(`https://flights.onrender.com/world`, {
+    method: "GET",
+  });
+  console.log(res);
+};
 function App() {
   React.useEffect(async () => {
-    async function fetchMyAPI() {
-      var res = await fetch(`https://flights.onrender.com/world`, {
-        method: "GET",
-      });
-      console.log(res);
-    }
-
-    fetchMyAPI();
+    test().then({});
   }, []);
 
   return (
