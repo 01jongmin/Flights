@@ -8,6 +8,7 @@ const test = async () => {
   });
   console.log(res);
 };
+
 function App() {
   React.useEffect(async () => {
     test().then({});
