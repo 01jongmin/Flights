@@ -1,5 +1,6 @@
 #[macro_use] extern crate rocket;
 extern crate dotenv;
+extern crate rocket_cors;
 
 use rocket::serde::{Deserialize, Serialize};
 use rocket::serde::json::{Json, Value, json};
@@ -9,6 +10,9 @@ use rocket::figment::{value::{Map}, util::map};
 
 use dotenv::dotenv;
 use std::{env};
+
+use rocket_cors::{AllowedHeaders, AllowedOrigins};
+use rocket::http::Method;
 
 #[database("mysql_db")]
 struct MyDatabase(diesel::MysqlConnection);
@@ -70,6 +74,18 @@ fn new(task: Json<Point>) -> Value {
 fn rocket() -> _ {
     dotenv().ok();
 
+    let allowed_origins = AllowedOrigins::all();
+
+    let cors = rocket_cors::CorsOptions {
+        allowed_origins,
+        allowed_methods: vec![Method::Get].into_iter().map(From::from).collect(),
+        allowed_headers: AllowedHeaders::some(&["Authorization", "Accept"]),
+        allow_credentials: true,
+        ..Default::default()
+    }
+    .to_cors().expect("Error setting up cors");
+
+
     let db: Map<_, Value> = map! {
         "url" => env::var("DB_CONNECTION_URL").expect("missing env vavriable DB_CONNECTION_URL").into(),
         "pool_size" => env::var("DB_POOL_SIZE").expect("missing env vavriable DB_POOL_SIZE").parse::<i32>().expect("DB_POOL_SIZE IS NOT INT").into(),
@@ -78,5 +94,8 @@ fn rocket() -> _ {
     let figment = rocket::Config::figment().merge(("databases", map!["mysql_db" => db]));
 
 
-    rocket::custom(figment).attach(MyDatabase::fairing()).mount("/", routes![index, hello, new, get_logs])
+    rocket::custom(figment)
+            .attach(MyDatabase::fairing())
+            .attach(cors)
+            .mount("/", routes![index, hello, new, get_logs])
 }
