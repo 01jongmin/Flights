@@ -7,6 +7,7 @@
 # git config --global core.excludesfile ~/.gitignore
 
 # More information: http://help.github.com/git-ignore/
+#
 
 # Linux files
 *~
