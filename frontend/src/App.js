@@ -10,7 +10,7 @@ const test = async () => {
 };
 
 function App() {
-  React.useEffect(async () => {
+  React.useEffect(() => {
     test().then({});
   }, []);
 
