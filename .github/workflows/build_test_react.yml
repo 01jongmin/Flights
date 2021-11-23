@@ -38,14 +38,14 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
-        working-directory: ./client
+        working-directory: ./frontend
 
       - run: npm run build
-        working-directory: ./client
+        working-directory: ./frontend
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./client/build
+          publish_dir: ./frontend/build
