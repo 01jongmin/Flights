@@ -5,9 +5,10 @@ edition = "2021"
 
 
 [dependencies]
-diesel = { version = "1.4.8" }
+diesel = { version = "1.4.8", features=["mysql"]}
 dotenv = "0.15.0"
 rocket_cors = { git = "https://github.com/lawliet89/rocket_cors", branch = "master" }
+serde = { version = "1.0", features = ["derive"] }
 
 [dependencies.rocket]
 version = "0.5.0-rc.1"
