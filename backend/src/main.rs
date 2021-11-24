@@ -1,72 +1,56 @@
 #[macro_use] extern crate rocket;
 #[macro_use] extern crate diesel;
-extern crate rocket_cors;
 
 mod models;
 mod schema;
+mod alliances;
+mod countries;
+mod weather;
+mod db;
+mod cors;
+mod planes;
 
-use rocket_sync_db_pools::{database};
-use rocket::figment::{value::{Map, Value}, util::map};
-use rocket::serde::json::Json;
-use serde::Serialize;
-use diesel::result::Error as DieselError;
+use rocket::{Build, Rocket};
 
-use dotenv::dotenv;
-use std::{env};
+use db::MyDatabase;
 
-use rocket_cors::{AllowedHeaders, AllowedOrigins};
-use rocket::http::Method;
+use rocket_okapi::{mount_endpoints_and_merged_docs, openapi_get_routes_spec};
+use rocket_okapi::swagger_ui::{make_swagger_ui, SwaggerUIConfig};
 
-use models::{Country};
-use diesel::{prelude::*, sql_query};
-
-use rocket::http::Status;
-
-#[database("mysql_db")]
-struct MyDatabase(diesel::MysqlConnection);
-
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
+#[rocket::main]
+async fn main() {
+    let launch_result = create_server().launch().await;
+    match launch_result {
+        Ok(()) => println!("Rocket shut down gracefully."),
+        Err(err) => println!("Rocket had an error: {}", err),
+    };
 }
 
-#[get("/countries")]
-async fn get_logs(conn: MyDatabase) -> Result<Json<Vec<Country>>, Status> {
-    let countries = conn.run(|c| {
-        sql_query("SELECT * FROM Countries").load(c)
-    }).await;
+pub fn create_server() -> Rocket<Build> {
+    let mut building_rocket = rocket::custom(db::get_database_figment())
+            .attach(db::MyDatabase::fairing())
+            .attach(cors::get_cors_option())
+            .mount("/api", 
+                make_swagger_ui(&SwaggerUIConfig {
+                    url: "../openapi.json".to_owned(),
+                    ..Default::default()
+                }),
+            );
 
-    match countries {
-        Ok(countries) => Ok(Json(countries)),
-        Err(_) => Err(Status::BadRequest),
-    }
-}
+    let openapi_settings = rocket_okapi::settings::OpenApiSettings::default();
 
-#[launch]
-fn rocket() -> _ {
-    dotenv().ok();
-
-    let allowed_origins = AllowedOrigins::all();
-
-    let cors = rocket_cors::CorsOptions {
-        allowed_origins,
-        allowed_methods: vec![Method::Get].into_iter().map(From::from).collect(),
-        allowed_headers: AllowedHeaders::some(&["Authorization", "Accept"]),
-        allow_credentials: true,
-        ..Default::default()
-    }
-    .to_cors().expect("Error setting up cors");
-
-
-    let db: Map<_, Value> = map! {
-        "url" => env::var("DB_CONNECTION_URL").expect("missing env vavriable DB_CONNECTION_URL").into(),
-        "pool_size" => env::var("DB_POOL_SIZE").expect("missing env vavriable DB_POOL_SIZE").parse::<i32>().expect("DB_POOL_SIZE IS NOT INT").into(),
+    mount_endpoints_and_merged_docs! {
+        building_rocket, "/".to_owned(), openapi_settings,
+        "/alliances" => openapi_get_routes_spec![openapi_settings: alliances::get_all_alliances, 
+                                                                   alliances::alliance_airlines,
+                                                                   alliances::alliance_airports],
+        "/countries" => openapi_get_routes_spec![openapi_settings: countries::get_all_countries],
+        "/weather" => openapi_get_routes_spec![openapi_settings: weather::get_average_temp,
+                                                                 weather::get_temp_range_city],
+        "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes],
+                                                                 //weather::get_temp_range_city],
+        //"/message" => message::get_routes_and_docs(&openapi_settings),
     };
 
-    let figment = rocket::Config::figment().merge(("databases", map!["mysql_db" => db]));
-
-    rocket::custom(figment)
-            .attach(MyDatabase::fairing())
-            .attach(cors)
-            .mount("/", routes![index, get_logs])
+    building_rocket
 }

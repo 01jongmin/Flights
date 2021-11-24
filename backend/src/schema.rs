@@ -37,8 +37,8 @@ table! {
 table! {
     Alliances (id) {
         id -> Char,
-        Name -> Nullable<Varchar>,
-        Image -> Nullable<Varchar>,
+        name -> Varchar,
+        image -> Varchar,
     }
 }
 
@@ -76,7 +76,7 @@ table! {
     Planes (iata, icao) {
         iata -> Char,
         icao -> Char,
-        name -> Nullable<Varchar>,
+        name -> Varchar,
     }
 }
 
@@ -94,7 +94,7 @@ table! {
     Weather (city_id, date) {
         city_id -> Integer,
         date -> Date,
-        temp -> Nullable<Decimal>,
+        temp -> Nullable<Double>,
     }
 }
 
