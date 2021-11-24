@@ -9,16 +9,16 @@ use serde::{Serialize};
 use schemars::JsonSchema;
 
 #[derive(Serialize, QueryableByName, JsonSchema)]
-struct RoutesSourceTarget {
-    #[sql_type="Varchar"]
+pub struct RoutesSourceTarget {
+    #[sql_type="Nullable<Varchar>"]
     source_city: Option<String>,
-    #[sql_type="Varchar"]
+    #[sql_type="Nullable<Varchar>"]
     target_city: Option<String>,
 }
 
 #[openapi(tag = "Planes")]
 #[get("/routes?<model_name>")]
-pub async fn alliance_airlines(conn: MyDatabase, model_name: String) -> Result<Json<Vec<RoutesSourceTarget>>, Status> {
+pub async fn routes_with_plane_model(conn: MyDatabase, model_name: String) -> Result<Json<Vec<RoutesSourceTarget>>, Status> {
     let routes = conn.run( move |c| {
         let query = format!(
             "SELECT SourcePort.city as source_city, DestiPort.city as target_city FROM Routes

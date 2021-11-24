@@ -47,7 +47,8 @@ pub fn create_server() -> Rocket<Build> {
         "/countries" => openapi_get_routes_spec![openapi_settings: countries::get_all_countries],
         "/weather" => openapi_get_routes_spec![openapi_settings: weather::get_average_temp,
                                                                  weather::get_temp_range_city],
-        "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes],
+        "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes,
+                                                                planes::routes_with_plane_model],
                                                                  //weather::get_temp_range_city],
         //"/message" => message::get_routes_and_docs(&openapi_settings),
     };
