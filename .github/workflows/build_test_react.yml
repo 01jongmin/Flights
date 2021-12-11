@@ -69,7 +69,14 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./backend
-          #file: ./backend/Dockerfile
           push: true
-          tags: 01jongmin/flights:latest
-
+          tags: 01jongmin/flights-backend:latest
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v19
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: rocket
+          environment_name: Rocket-env
+          version_label: Sample Application-1
+          region: us-east-2
