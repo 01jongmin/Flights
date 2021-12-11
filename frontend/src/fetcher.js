@@ -1,7 +1,7 @@
 import config from "./config.json";
 
 const getAlliances = async () => {
-  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/alliances/` , {
+  var res = await fetch(`https://d32kwfhg1q7nsk.cloudfront.net/alliances/` , {
     method: 'GET',
   })
   return res.json()
