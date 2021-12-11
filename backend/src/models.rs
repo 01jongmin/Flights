@@ -1,4 +1,4 @@
-use crate::schema::{AirlineAlliances, Countries, Alliances, Planes};
+use crate::schema::{AirlineAlliances, Countries, Alliances, Planes, Airports};
 use serde::{Serialize, Deserialize};
 use schemars::JsonSchema;
 
@@ -32,4 +32,19 @@ pub struct Plane {
     pub name: String,
 }
 
-
+#[derive(Queryable, QueryableByName, Serialize, Deserialize, JsonSchema)]
+#[table_name="Airports"]
+pub struct Airport {
+    pub id: i32,
+    pub name: String,
+    pub city: Option<String>,
+    pub country: String,
+    pub iata: Option<String>,
+    pub icao: Option<String>,
+    pub lat: Option<f64>,
+    pub lon: Option<f64>,
+    pub alt: Option<i32>,
+    pub timezone: Option<f64>,
+    pub dst: Option<String>,
+    pub tz: Option<String>
+}

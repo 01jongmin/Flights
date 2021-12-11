@@ -1,5 +1,5 @@
 use crate::MyDatabase;
-use crate::models::{Alliance, AirlineAlliance};
+use crate::models::{Alliance};
 use crate::schema::Alliances::dsl::Alliances;
 use rocket::http::Status;
 use rocket::serde::json::Json;
@@ -14,17 +14,22 @@ struct AirlineName {
     name: String,
 }
 
+///  - Inner line doc
 #[openapi(tag = "Alliances")]
-#[get("/<alliance_name>/airlines")]
-pub async fn alliance_airlines(conn: MyDatabase, alliance_name: String) -> Result<Json<Vec<String>>, Status> {
+#[get("/<alliance_name>/airlines?<page_size>&<page>")]
+pub async fn alliance_airlines(conn: MyDatabase, alliance_name: String, page_size: Option<u32>, page: Option<u32>) -> Result<Json<Vec<String>>, Status> {
+    let page_size = page_size.unwrap_or(10);
+    let page = page.unwrap_or(1);
     let all_alliance_airline = conn.run( move |c| {
         let query = format!(
             "SELECT A.name as name FROM Alliances
             JOIN AirlineAlliances AA on Alliances.id = AA.alliance
             JOIN Airlines A on AA.airline = A.id
             WHERE Alliances.name = '{}'
-            LIMIT 3",
-            alliance_name);
+            LIMIT {}, {}",
+            alliance_name,
+            (page - 1) * page_size,
+            page_size);
 
         return sql_query(query).load(c);
     }).await;

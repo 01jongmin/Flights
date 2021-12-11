@@ -25,10 +25,10 @@ table! {
         country -> Char,
         iata -> Nullable<Char>,
         icao -> Nullable<Char>,
-        lat -> Nullable<Decimal>,
-        lon -> Nullable<Decimal>,
+        lat -> Nullable<Double>,
+        lon -> Nullable<Double>,
         alt -> Nullable<Integer>,
-        timezone -> Nullable<Decimal>,
+        timezone -> Nullable<Double>,
         dst -> Nullable<Char>,
         tz -> Nullable<Varchar>,
     }

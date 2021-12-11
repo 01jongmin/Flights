@@ -9,6 +9,7 @@ mod weather;
 mod db;
 mod cors;
 mod planes;
+mod airports;
 
 use rocket::{Build, Rocket};
 
@@ -50,8 +51,7 @@ pub fn create_server() -> Rocket<Build> {
                                                                  weather::get_temp_range_city],
         "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes,
                                                                 planes::routes_with_plane_model],
-                                                                 //weather::get_temp_range_city],
-        //"/message" => message::get_routes_and_docs(&openapi_settings),
+        "/airports" => openapi_get_routes_spec![openapi_settings: airports::get_all_airports]
     };
 
     building_rocket
