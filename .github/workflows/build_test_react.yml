@@ -56,7 +56,7 @@ jobs:
       steps:
         - uses: actions/checkout@v2
           with:
-            path: backend
+            path: ./backend
         -
           name: Set up QEMU
           uses: docker/setup-qemu-action@v1
