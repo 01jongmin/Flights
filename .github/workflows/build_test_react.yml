@@ -71,4 +71,5 @@ jobs:
           context: ./backend
           #file: ./backend/Dockerfile
           push: true
-          tags: user/flights:latest
+          tags: 01jongmin/flights:latest
+
