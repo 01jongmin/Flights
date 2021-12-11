@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "01jongmin/flights-backend"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 8000,
+      "HostPort": 8000
+    }
+  ]
+}

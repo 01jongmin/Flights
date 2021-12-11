@@ -3,7 +3,10 @@ import "./App.css";
 import React from "react";
 
 const test = async () => {
-  var res = await fetch(`https://flights.onrender.com/world`, {
+  //var res = await fetch(`https://flights.onrender.com/world`, {
+    //method: "GET",
+  //});
+  var res = await fetch(`http://localhost:8000`, {
     method: "GET",
   });
   console.log(res);
