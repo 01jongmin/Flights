@@ -55,8 +55,6 @@ jobs:
       
       steps:
         - uses: actions/checkout@v2
-          with:
-            path: ./backend
         -
           name: Set up QEMU
           uses: docker/setup-qemu-action@v1
@@ -74,6 +72,6 @@ jobs:
           id: docker_build
           uses: docker/build-push-action@v2
           with:
-            context: .
+            context: ./backend/
             push: true
             tags: user/flights:latest
