@@ -22,7 +22,8 @@ pub async fn alliance_airlines(conn: MyDatabase, alliance_name: String) -> Resul
             "SELECT A.name as name FROM Alliances
             JOIN AirlineAlliances AA on Alliances.id = AA.alliance
             JOIN Airlines A on AA.airline = A.id
-            WHERE Alliances.name = '{}'",
+            WHERE Alliances.name = '{}'
+            LIMIT 3",
             alliance_name);
 
         return sql_query(query).load(c);
