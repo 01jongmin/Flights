@@ -70,6 +70,6 @@ jobs:
           id: docker_build
           uses: docker/build-push-action@v2
           with:
-            context: ./backend
+            context: ./backend/Dockerfile
             push: true
             tags: user/flights:latest
