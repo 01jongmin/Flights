@@ -73,5 +73,7 @@ jobs:
           uses: docker/build-push-action@v2
           with:
             context: ./backend
+            file: ./backend/Dockerfile
+            no-cache: true
             push: true
             tags: user/flights:latest
