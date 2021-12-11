@@ -14,9 +14,9 @@ ReactDOM.render(
   <div>
     <Router>
       <Switch>
-        <Route exact path="/" render={() => <HomePage />} />
-        <Route exact path="/players" render={() => <PlayersPage />} />
-        <Route exact path="/matches" render={() => <MatchesPage />} />
+        <Route exact path="/Flights/" render={() => <HomePage />} />
+        <Route exact path="/Flights/players" render={() => <PlayersPage />} />
+        <Route exact path="/Flights/matches" render={() => <MatchesPage />} />
       </Switch>
     </Router>
   </div>,
