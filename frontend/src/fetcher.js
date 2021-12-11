@@ -1,11 +1,11 @@
 import config from "./config.json";
 
 const getAlliances = async () => {
-  var res = await fetch(`https://d32kwfhg1q7nsk.cloudfront.net/alliances/` , {
-    method: 'GET',
-  })
-  return res.json()
-}
+  var res = await fetch(`https://api.flights-550.net/alliances/`, {
+    method: "GET",
+  });
+  return res.json();
+};
 
 const getAllMatches = async (page, pagesize, league) => {
   //var res = await fetch(
@@ -47,6 +47,4 @@ const getPlayerSearch = async (
   return {};
 };
 
-export {
-  getAlliances
-};
+export { getAlliances };
