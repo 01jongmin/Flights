@@ -148,7 +148,7 @@ class HomePage extends React.Component {
 								sorter={(a, b) => a.Away.localeCompare(b.Away)}
 							/>
 						</ColumnGroup>
-						<ColumnGroup title="Goals">
+						<ColumnGroup title="Goal">
 							{/* TASK 5: add columns for home and away goals in this ColumnGroup, with the ability to sort values in these columns numerically */}
 							<Column
 								title="Home Goals"
