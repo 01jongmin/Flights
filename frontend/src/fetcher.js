@@ -1,5 +1,12 @@
 import config from "./config.json";
 
+const getAlliances = async () => {
+  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/alliances/` , {
+    method: 'GET',
+  })
+  return res.json()
+}
+
 const getAllMatches = async (page, pagesize, league) => {
   //var res = await fetch(
   //`http://${config.server_host}:${config.server_port}/matches/${league}?page=${page}&pagesize=${pagesize}`,
@@ -41,10 +48,5 @@ const getPlayerSearch = async (
 };
 
 export {
-  getAllMatches,
-  getAllPlayers,
-  getMatch,
-  getPlayer,
-  getMatchSearch,
-  getPlayerSearch,
+  getAlliances
 };

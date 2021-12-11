@@ -2,49 +2,26 @@ import React from "react";
 import { Table, Select } from "antd";
 
 import MenuBar from "../components/MenuBar";
-import { getAllMatches, getAllPlayers } from "../fetcher";
+import { getAlliances } from "../fetcher";
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 
-const playerColumns = [
+const allianceColumns = [
+	{
+		title: "id",
+		dataIndex: "id",
+		key: "id",
+	},
 	{
 		title: "Name",
-		dataIndex: "Name",
+		dataIndex: "name",
 		key: "Name",
 		sorter: (a, b) => a.Name.localeCompare(b.Name),
-		render: (text, row) => <a href={`/players?id=${row.PlayerId}`}>{text}</a>,
 	},
 	{
-		title: "Nationality",
-		dataIndex: "Nationality",
-		key: "Nationality",
-		sorter: (a, b) => a.Nationality.localeCompare(b.Nationality),
-	},
-	{
-		title: "Rating",
-		dataIndex: "Rating",
-		key: "Rating",
-		sorter: (a, b) => a.Rating - b.Rating,
-	},
-	// TASK 7: add a column for Potential, with the ability to (numerically) sort ,
-	{
-		title: "Potential",
-		dataIndex: "Potential",
-		key: "Potential",
-		sorter: (a, b) => a.Potential - b.Potential,
-	},
-	// TASK 8: add a column for Club, with the ability to (alphabetically) sort
-	{
-		title: "Club",
-		dataIndex: "Club",
-		key: "Club",
-		sorter: (a, b) => a.Club.localeCompare(b.Club),
-	},
-	// TASK 9: add a column for Value - no sorting required
-	{
-		title: "Value",
-		dataIndex: "Value",
-		key: "Value",
+		title: "Image",
+		dataIndex: "image",
+		key: "Image",
 	},
 ];
 
@@ -53,6 +30,7 @@ class HomePage extends React.Component {
 		super(props);
 
 		this.state = {
+			alliances: [],
 			matchesResults: [],
 			matchesPageNumber: 1,
 			matchesPageSize: 10,
@@ -71,19 +49,14 @@ class HomePage extends React.Component {
 	leagueOnChange(value) {
 		// TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
 		// then, matchesResults in state should be set to the results returned - see a similar function call in componentDidMount()
-		getAllMatches(null, null, value).then((res) => {
-			this.setState({ matchesResults: res.results });
+		getAlliances().then((res) => {
+			this.setState({ alliances: res });
 		});
 	}
 
 	componentDidMount() {
-		getAllMatches(null, null, "D1").then((res) => {
-			this.setState({ matchesResults: res.results });
-		});
-
-		getAllPlayers().then((res) => {
-			// TASK 1: set the correct state attribute to res.results
-			this.setState({ playersResults: res.results });
+		getAlliances().then((res) => {
+			this.setState({ alliances: res });
 		});
 	}
 
@@ -92,10 +65,10 @@ class HomePage extends React.Component {
 			<div>
 				<MenuBar />
 				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
-					<h3>Players</h3>
+					<h3>Alliances</h3>
 					<Table
-						dataSource={this.state.playersResults}
-						columns={playerColumns}
+						dataSource={this.state.alliances}
+						columns={allianceColumns}
 						pagination={{
 							pageSizeOptions: [5, 10],
 							defaultPageSize: 5,
