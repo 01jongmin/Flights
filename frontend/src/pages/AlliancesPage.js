@@ -16,7 +16,6 @@ const allianceColumns = [
 		title: "Name",
 		dataIndex: "name",
 		key: "Name",
-		sorter: (a, b) => a.Name.localeCompare(b.Name),
 	},
 	{
 		title: "ID",
