@@ -2,7 +2,7 @@ use rocket::http::Method;
 use rocket_cors::{Cors, AllowedHeaders, AllowedOrigins};
 
 pub fn get_cors_option() -> Cors {
-    let allowed_origins = AllowedOrigins::some_regex(&["https://01jongmin.github.io/Flights/*", "http::localhost:*"]);
+    let allowed_origins = AllowedOrigins::some_regex(&["http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/*", "http://localhost:*"]);
 
     rocket_cors::CorsOptions {
         allowed_origins,
