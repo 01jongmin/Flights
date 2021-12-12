@@ -7,44 +7,62 @@ const getAlliances = async () => {
   return res.json();
 };
 
-const getAllMatches = async (page, pagesize, league) => {
-  //var res = await fetch(
-  //`http://${config.server_host}:${config.server_port}/matches/${league}?page=${page}&pagesize=${pagesize}`,
-  //{
-  //method: "GET",
-  //}
-  //);
-  return {};
-};
+const getAirlinesFromAlliance = async (allianceName, pagesize, page) => {
+  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/alliances/${allianceName}/airlines?page_size=${pagesize}&page=${page}/`, {
+    method: "GET",
+  });
+  return res.json();
+}
 
-const getAllPlayers = async (page, pagesize) => {
-  return {};
-};
+const getAirportsFromAlliance = async (allianceName) => {
+  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/alliances/${allianceName}|/airports`, {
+    method: "GET",
+  });
+  return res.json();
+}
 
-const getMatch = async (id) => {
-  return {};
-};
+const getCountries = async () => { 
+  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/countries/`, {
+    method: "GET",
+  });
+  return res.json();
+}
 
-const getPlayer = async (id) => {
-  return {};
-};
+const getDestinationsFromCountry = async (country) => {
+  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/countries/destinations?country_name=country`, {
+    method: "GET",
+  });
+  return res.json();
+}
 
-const getMatchSearch = async (home, away, page, pagesize) => {
-  return {};
-};
+const getPlanes = async () => {
+  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/planes/`, {
+    method: "GET",
+  });
+  return res.json();
+}
 
-const getPlayerSearch = async (
-  name,
-  nationality,
-  club,
-  rating_high,
-  rating_low,
-  pot_high,
-  pot_low,
-  page,
-  pagesize
-) => {
-  return {};
-};
+const getRoutesFromPlane = async (model_name) => {
+  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/planes/routes?model_name=${model_name}`, {
+    method: "GET",
+  });
+  return res.json();
+}
 
-export { getAlliances };
+const getAirports = async (page, pagesize) => {
+  var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/airports/?page_size=${pagesize}&page=${page}`, {
+    method: "GET",
+  });
+  return res.json();
+}
+
+
+export { getAlliances,
+getAirlinesFromAlliance,
+getAirportsFromAlliance, 
+getCountries,
+getDestinationsFromCountry,
+getPlanes,
+getRoutesFromPlane,
+getAirports
+ };
