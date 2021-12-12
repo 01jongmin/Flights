@@ -59,11 +59,11 @@ table! {
 table! {
     Landmarks (id) {
         id -> Integer,
-        name -> Nullable<Varchar>,
-        lat -> Nullable<Decimal>,
-        lon -> Nullable<Decimal>,
-        imageUrl -> Nullable<Varchar>,
-        country -> Nullable<Char>,
+        name -> Varchar,
+        lat -> Decimal,
+        lon -> Decimal,
+        imageUrl -> Varchar,
+        country -> Char,
     }
 }
 
@@ -86,8 +86,8 @@ table! {
 }
 
 table! {
-    Weather (city_id, date) {
-        city_id -> Integer,
+    Weather (station_id, date) {
+        station_id -> Integer,
         date -> Date,
         temp -> Nullable<Double>,
     }
@@ -117,7 +117,7 @@ joinable!(Airports -> Countries (country));
 joinable!(CountryAliases -> Countries (country));
 joinable!(Landmarks -> Countries (country));
 joinable!(Routes -> Airlines (airline_id));
-joinable!(Weather -> WeatherStation (city_id));
+joinable!(Weather -> WeatherStation (station_id));
 joinable!(WeatherStation -> Countries (country));
 
 allow_tables_to_appear_in_same_query!(

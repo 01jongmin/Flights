@@ -47,14 +47,16 @@ pub fn create_server() -> Rocket<Build> {
                                                                    alliances::alliance_airlines,
                                                                    alliances::alliance_airports],
         "/countries" => openapi_get_routes_spec![openapi_settings: countries::get_all_countries,
-                                                                   countries::destination_count],
+                                                                   countries::destination_count,
+                                                                   countries::manufacturer_country],
         "/weather" => openapi_get_routes_spec![openapi_settings: weather::get_average_temp,
                                                                  weather::get_temp_range_city],
         "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes,
                                                                 planes::routes_with_plane_model],
         "/airports" => openapi_get_routes_spec![openapi_settings: airports::get_all_airports,
                                                                   airports::distance_limit],
-        "/routes" => openapi_get_routes_spec![openapi_settings: routes::airline_routes]
+        "/routes" => openapi_get_routes_spec![openapi_settings: routes::airline_routes],
+
     };
 
     building_rocket

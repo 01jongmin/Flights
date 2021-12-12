@@ -8,10 +8,17 @@ use serde::{Serialize};
 use schemars::JsonSchema;
 
 #[openapi(tag = "Countries")]
-#[get("/")]
-pub async fn get_all_countries(conn: MyDatabase) -> Result<Json<Vec<Country>>, Status> {
-    let countries = conn.run(|c| {
-        sql_query("SELECT * FROM Countries").load(c)
+#[get("/?<name_query>")]
+pub async fn get_all_countries(conn: MyDatabase, name_query: Option<String>) -> Result<Json<Vec<Country>>, Status> {
+    let name_query = name_query.unwrap_or(String::new());
+    let countries = conn.run(move |c| {
+        let query = format!(
+            "SELECT DISTINCT Countries.name as name, Countries.iso_code as iso_code FROM Countries
+            JOIN CountryAliases CA on Countries.iso_code = CA.country
+            WHERE CA.name LIKE '%{}%'",
+            name_query
+            );
+        sql_query(query).load(c)
     }).await;
 
     match countries {
@@ -48,6 +55,58 @@ pub async fn destination_count(conn: MyDatabase, country_name: String) -> Result
     match res {
         Ok(res) => Ok(Json(res)),
         Err(_) => Err(Status::BadRequest),
+    }
+ }
+
+#[derive(Serialize, QueryableByName, JsonSchema)]
+pub struct ManufacturerAirport {
+    #[sql_type="Char"]
+    country: String,
+    #[sql_type="VarChar"]
+    mft: String,
+    #[sql_type="BigInt"]
+    total: i64,
+    #[sql_type="Integer"]
+    id: i32,
+    #[sql_type="VarChar"]
+    name: String,
+    #[sql_type="Char"]
+    iata: String,
+    #[sql_type="Char"]
+    icao: String,
+    #[sql_type="Double"]
+    lat: f64,
+    #[sql_type="Double"]
+    lon: f64,
+}
+
+#[openapi(tag = "Countries")]
+#[get("/<country_name>/manufacturer")]
+pub async fn manufacturer_country(conn: MyDatabase, country_name: String) -> Result<Json<Vec<ManufacturerAirport>>, Status> {
+    let res = conn.run( move |c| {
+        let query = format!(
+            "WITH PlanesByMFT AS (SELECT iata, SUBSTRING_INDEX(name, ' ', 1) AS mft FROM Planes),
+             RoutesN AS (SELECT * FROM Routes JOIN PlanesByMFT ON Routes.plane_id = PlanesByMFT.iata),
+            RoutesNL AS (SELECT RoutesN.id, source_id, target_id, plane_id, RoutesN.iata, mft, Airports.country AS countryS FROM RoutesN JOIN Airports ON RoutesN.source_id=Airports.id),
+            RoutesNR AS (SELECT RoutesNL.id, source_id, target_id, plane_id, RoutesNL.iata, mft, countryS, Airports.country AS countryT FROM RoutesNL JOIN Airports ON RoutesNL.target_id=Airports.id),
+             fromSource AS (SELECT source_id, countryS AS country, mft, COUNT(*) AS num FROM RoutesNR rnr GROUP BY source_id, countryS, mft),
+            toSource AS (SELECT target_id, countryT AS country , mft, COUNT(*) AS num FROM RoutesNR GROUP BY target_id, countryT, mft),
+            finalTotal AS (SELECT f.country AS country, f.mft, source_id, f.num + t.num AS total FROM fromSource f JOIN toSource t on f.source_id=t.target_id AND f.country = t.country AND f.mft = t.mft),
+            minVal AS (SELECT country, mft, MAX(total) AS max from finalTotal GROUP BY country, mft),
+             minAir AS (SELECT f.country AS country, f.mft AS mft, total, source_id FROM finalTotal f INNER JOIN minVal m ON m.country = f.country AND m.mft = f.mft AND m.max = f.total ORDER BY mft, total, country),
+            interFinal AS (SELECT minAir.country AS countryX, mft, total, id, name, city, iata, icao, lat, lon, alt, timezone, dst, tz FROM minAir JOIN Airports ON minAir.source_id = Airports.id AND minAir.country = Airports.country ORDER BY mft, countryX)
+            SELECT countryX as country, mft, total, id, name, city, iata, icao, lat, lon FROM interFinal WHERE countryX = '{}'",
+            country_name);
+
+        return sql_query(query).load(c);
+    }).await;
+
+    match res {
+        Ok(res) => Ok(Json(res)),
+        Err(e) => {
+            print!("{}", e);
+            Err(Status::BadRequest)
+        }
     }
  }
 //#[openapi(tag = "Alliances")]
