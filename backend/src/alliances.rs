@@ -14,7 +14,7 @@ struct AirlineName {
     name: String,
 }
 
-///  - Inner line doc
+///  - Returns all airlines for a given alliance name
 #[openapi(tag = "Alliances")]
 #[get("/<alliance_name>/airlines?<page_size>&<page>")]
 pub async fn alliance_airlines(conn: MyDatabase, alliance_name: String, page_size: Option<u32>, page: Option<u32>) -> Result<Json<Vec<String>>, Status> {
@@ -41,25 +41,30 @@ pub async fn alliance_airlines(conn: MyDatabase, alliance_name: String, page_siz
 }
 
 #[derive(Serialize, QueryableByName, JsonSchema, Debug)]
-struct AirportName {
+pub struct AllianceAirport {
     #[sql_type="Char"]
     name: String,
+    #[sql_type="Double"]
+    lat: f64,
+    #[sql_type="Double"]
+    lon: f64,
 }
 
+///  - Returns all airports serviced by a given alliance
 #[openapi(tag = "Alliances")]
 #[get("/<alliance_name>/airports")]
-pub async fn alliance_airports(conn: MyDatabase, alliance_name: String) -> Result<Json<Vec<String>>, Status> {
+pub async fn alliance_airports(conn: MyDatabase, alliance_name: String) -> Result<Json<Vec<AllianceAirport>>, Status> {
     let all_alliance_airports = conn.run( move |c| {
         let query = format!(
             "WITH CorrAirline AS (SELECT Airlines.id FROM Airlines
             JOIN AirlineAlliances AA on Airlines.id = AA.airline
             JOIN Alliances A on A.id = AA.alliance
             WHERE A.name = '{}')
-            SELECT DISTINCT Airports.name FROM Routes
+            SELECT DISTINCT Airports.name, Airports.lat, Airports.lon FROM Routes
             JOIN Airports ON Routes.source_id = Airports.id
             WHERE airline_id IN (SELECT * FROM CorrAirline)
             UNION
-            SELECT DiSTINCT Airports.name FROM Routes
+            SELECT DiSTINCT Airports.name, Airports.lat, Airports.lon FROM Routes
             JOIN Airports ON Routes.target_id = Airports.id
             WHERE airline_id IN (SELECT * FROM CorrAirline)",
             alliance_name);
@@ -68,12 +73,12 @@ pub async fn alliance_airports(conn: MyDatabase, alliance_name: String) -> Resul
     }).await;
 
     match all_alliance_airports {
-        Ok(all_alliance_airports) => Ok(Json(all_alliance_airports.into_iter().map(|a: AirportName| a.name).collect())),
+        Ok(all_alliance_airports) => Ok(Json(all_alliance_airports)),
         Err(_) => Err(Status::BadRequest),
     }
 }
 
-
+///  - Returns all alliances
 #[openapi(tag = "Alliances")]
 #[get("/")]
 pub async fn get_all_alliances(conn: MyDatabase) -> Result<Json<Vec<Alliance>>, Status> {
@@ -86,15 +91,3 @@ pub async fn get_all_alliances(conn: MyDatabase) -> Result<Json<Vec<Alliance>>, 
         Err(_) => Err(Status::BadRequest),
     }
 }
-
-//#[get("/airlines")]
-//pub async fn get_all_airline(conn: MyDatabase) -> Result<Json<Vec<String>>, Status> {
-    //let all_alliances = conn.run( |c| {
-        //Alliances.load::<Alliance>(c)
-    //}).await;
-
-    //match all_alliances {
-        //Ok(all_alliances) => Ok(Json(all_alliances)),
-        //Err(_) => Err(Status::BadRequest),
-    //}
-//}

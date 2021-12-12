@@ -1,5 +1,5 @@
 use crate::MyDatabase;
-use crate::models::{Country};
+use crate::models::{Country, Airport};
 use rocket::http::Status;
 use rocket::serde::json::Json;
 use diesel::{prelude::*, sql_query, sql_types::*};
@@ -7,9 +7,11 @@ use rocket_okapi::openapi;
 use serde::{Serialize};
 use schemars::JsonSchema;
 
+
+/// - Returns countries by referencing alias names
 #[openapi(tag = "Countries")]
 #[get("/?<name_query>")]
-pub async fn get_all_countries(conn: MyDatabase, name_query: Option<String>) -> Result<Json<Vec<Country>>, Status> {
+pub async fn get_countries(conn: MyDatabase, name_query: Option<String>) -> Result<Json<Vec<Country>>, Status> {
     let name_query = name_query.unwrap_or(String::new());
     let countries = conn.run(move |c| {
         let query = format!(
@@ -35,9 +37,29 @@ pub struct CountryCount {
     count: i64
 }
 
+
 #[openapi(tag = "Countries")]
-#[get("/destinations?<country_name>")]
-pub async fn destination_count(conn: MyDatabase, country_name: String) -> Result<Json<Vec<CountryCount>>, Status> {
+#[get("/airports?<name_query>")]
+pub async fn get_airports_for_country(conn: MyDatabase, name_query: String) -> Result<Json<Vec<Airport>>, Status> {
+    let country_airports = conn.run(move |c| {
+        let query = format!(
+            "SELECT * FROM Airports
+            WHERE Airports.country = '{}'",
+            name_query
+            );
+        sql_query(query).load(c)
+    }).await;
+
+    match country_airports {
+        Ok(country_airports) => Ok(Json(country_airports)),
+        Err(_) => Err(Status::BadRequest),
+    }
+}
+
+/// - Number of distinct airports grouped by country reachable from any airport in the provided country. (i.e. we can reach 33 airports in Mexico if we start from any airport in the US)
+#[openapi(tag = "Countries")]
+#[get("/destinations?<country_code>")]
+pub async fn destination_count(conn: MyDatabase, country_code: String) -> Result<Json<Vec<CountryCount>>, Status> {
     let res = conn.run( move |c| {
         let query = format!(
             "SELECT DestiC.name as name, COUNT(DISTINCT DestiPort.id) as count FROM Airports AS SourcePort
@@ -45,9 +67,9 @@ pub async fn destination_count(conn: MyDatabase, country_name: String) -> Result
             JOIN Airports AS DestiPort on Routes.target_id = DestiPort.id
             JOIN Countries SourceC on SourcePort.country = SourceC.iso_code
             JOIN Countries DestiC on DestiPort.country = DestiC.iso_code
-            WHERE SourceC.name = '{}'
+            WHERE SourceC.iso_code = '{}'
             GROUP BY DestiC.name",
-            country_name);
+            country_code);
 
         return sql_query(query).load(c);
     }).await;
@@ -109,15 +131,3 @@ pub async fn manufacturer_country(conn: MyDatabase, country_name: String) -> Res
         }
     }
  }
-//#[openapi(tag = "Alliances")]
-//#[get("/")]
-//pub async fn get_all_alliances(conn: MyDatabase) -> Result<Json<Vec<Alliance>>, Status> {
-    //let all_alliances = conn.run( |c| {
-        //Alliances.load::<Alliance>(c)
-    //}).await;
-
-    //match all_alliances {
-        //Ok(all_alliances) => Ok(Json(all_alliances)),
-        //Err(_) => Err(Status::BadRequest),
-    //}
-//}
