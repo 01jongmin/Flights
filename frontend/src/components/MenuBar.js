@@ -8,17 +8,17 @@ class MenuBar extends React.Component {
         <NavbarBrand href="/">CIS 550 FIFA</NavbarBrand>
         <Nav navbar>
           <NavItem>
-            <NavLink active href="/">
+            <NavLink active href="/#/">
               Home
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink active href="/players">
+            <NavLink active href="/#/players">
               Players
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink active href="/matches">
+            <NavLink active href="/#/matches">
               Matches
             </NavLink>
           </NavItem>
