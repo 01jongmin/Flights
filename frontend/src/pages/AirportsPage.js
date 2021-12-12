@@ -10,10 +10,11 @@ const { Option } = Select;
 
 const airportColumns = [
 	{
+		title: "Country",
 		dataIndex: "country",
 		key: "country",
-		render: isoCode =>  <ReactCountryFlag countryCode={isoCode} />
-
+		render: isoCode =>  <div><ReactCountryFlag countryCode={isoCode} /> {isoCode}</div>, 
+		sorter: (a,b) => a.country.localeCompare(b.country)
 	},
 	{
 		title: "IATA",
@@ -36,11 +37,6 @@ const airportColumns = [
 		dataIndex: "city",
 		key: "city",
 	},
-	{
-		title: "Country",
-		dataIndex: "country",
-		key: "country",
-	}
 ,
 ];
 
