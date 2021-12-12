@@ -64,83 +64,45 @@ class HomePage extends React.Component {
 		return (
 			<div>
 				<MenuBar />
-				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
-					<h3>Alliances</h3>
-					<Table
-						dataSource={this.state.alliances}
-						columns={allianceColumns}
-						pagination={{
-							pageSizeOptions: [5, 10],
-							defaultPageSize: 5,
-							showQuickJumper: true,
-						}}
-					/>
-				</div>
-				<div style={{ width: "70vw", margin: "0 auto", marginTop: "2vh" }}>
-					<h3>Matches</h3>
-					<Select
-						defaultValue="D1"
-						style={{ width: 120 }}
-						onChange={this.leagueOnChange}
-					>
-						{/* TASK 3: Take a look at Dataset Information.md from MS1 and add other options to the selector here  */}
-						<Option value="D1">Bundesliga</Option>
-						<Option value="SP1">La Liga</Option>
-						<Option value="F1">Ligue 1</Option>
-						<Option value="I1">Serie A</Option>
-						<Option value="E0">Premier League</Option>
-					</Select>
+				<div class="d-flex justify-content-center">
+				<div class="d-flex-column">
 
-					<Table
-						onRow={(record, rowIndex) => {
-							return {
-								onClick: (event) => {
-									this.goToMatch(record.MatchId);
-								}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter
-							};
-						}}
-						dataSource={this.state.matchesResults}
-						pagination={{
-							pageSizeOptions: [5, 10],
-							defaultPageSize: 5,
-							showQuickJumper: true,
-						}}
-					>
-						<ColumnGroup title="Teams">
-							{/* TASK 4: correct the title for the 'Home' column and add a similar column for 'Away' team in this ColumnGroup */}
-							<Column
-								title="Home"
-								dataIndex="Home"
-								key="Home"
-								sorter={(a, b) => a.Home.localeCompare(b.Home)}
-							/>
-							<Column
-								title="Away"
-								dataIndex="Away"
-								key="Away"
-								sorter={(a, b) => a.Away.localeCompare(b.Away)}
-							/>
-						</ColumnGroup>
-						<ColumnGroup title="Goal">
-							{/* TASK 5: add columns for home and away goals in this ColumnGroup, with the ability to sort values in these columns numerically */}
-							<Column
-								title="Home Goals"
-								dataIndex="HomeGoals"
-								key="HomeGoals"
-								sorter={(a, b) => a.HomeGoals - b.HomeGoals}
-							/>
-							<Column
-								title="Away Goals"
-								dataIndex="AwayGoals"
-								key="AwayGoals"
-								sorter={(a, b) => a.AwayGoals - b.AwayGoals}
-							/>
-						</ColumnGroup>
-						{/* TASK 6: create two columns (independent - not in a column group) for the date and time. Do not add a sorting functionality */}
-						<Column title="Date" dataIndex="Date" key="Date" />
-						<Column title="Time" dataIndex="Time" key="Time" />
-					</Table>
+				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
+				<svg id="FlightIcon" enable-background="new 0 0 512 512" height="200" viewBox="0 0 512 512" width="200" xmlns="http://www.w3.org/2000/svg"><g><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+fill="#FF8A65" stroke="#FF5722">
+<path d="M2230 5104 c-996 -127 -1833 -835 -2123 -1794 -78 -256 -107 -462
+-107 -750 0 -491 116 -914 363 -1325 404 -672 1099 -1123 1877 -1220 162 -20
+478 -20 640 0 1001 124 1842 831 2133 1795 78 256 107 462 107 750 0 491 -116
+914 -363 1325 -404 672 -1099 1123 -1877 1220 -153 19 -501 18 -650 -1z m388
+-996 c17 -40 39 -103 50 -139 44 -142 82 -456 82 -668 l0 -96 193 -182 192
+-181 26 24 c68 65 182 46 224 -37 9 -16 19 -78 24 -140 6 -70 14 -116 23 -124
+7 -6 137 -127 289 -268 l276 -257 7 -106 c4 -58 6 -108 3 -110 -2 -2 -286 134
+-631 302 -346 168 -629 304 -631 302 -1 -2 -19 -223 -39 -493 -20 -269 -38
+-501 -40 -515 -4 -22 20 -45 200 -189 140 -114 203 -170 200 -180 -3 -9 -8
+-37 -12 -64 -3 -26 -7 -47 -8 -47 -1 0 -96 32 -211 70 -275 92 -273 92 -556 4
+-117 -36 -219 -69 -227 -71 -11 -5 -12 6 -6 58 3 35 10 71 15 79 4 8 95 80
+203 160 156 116 194 149 191 165 -2 11 -17 240 -32 508 -27 478 -28 488 -48
+484 -11 -3 -296 -127 -634 -276 -338 -149 -616 -270 -618 -267 -2 2 2 46 9 97
+l13 94 280 264 280 264 -3 116 c-4 108 -2 118 20 151 15 21 41 42 70 54 41 17
+53 18 87 8 21 -7 52 -26 69 -43 l31 -31 199 186 199 186 6 159 c12 300 64 548
+159 753 17 37 34 68 39 68 4 0 21 -33 37 -72z"/>
+</g>
+</g></svg>
+			</div>
+				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
+					<h3>Welcome to FlightFinder</h3>
+					
+					There are XX flights, XX planes, XX alliances, XX landmarks available for perusal. 
+
 				</div>
+
+				
+				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
+				<a href="https://api.flights-550.net/api/index.html" target="_blank" class="btn btn-primary btn-lg" role="button" aria-pressed="true">See Auto-Generated API Documentation</a>
+
+				</div>
+			</div>
+			</div>
 			</div>
 		);
 	}

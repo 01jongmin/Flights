@@ -4,6 +4,7 @@ import About from "./About";
 import PlayerPage from "./pages/PlayersPage.js";
 import MatchPage from "./pages/MatchesPage.js";
 import Home from "./pages/HomePage.js";
+import AlliancesPage from "./pages/AlliancesPage";
 
 class App extends React.Component {
   render() {
@@ -16,8 +17,8 @@ class App extends React.Component {
           <Route exact path="/players">
             <PlayerPage />
           </Route>
-          <Route exact path="/matches">
-            <MatchPage />
+          <Route exact path="/alliances">
+            <AlliancesPage />
           </Route>
         </Switch>
       </div>
