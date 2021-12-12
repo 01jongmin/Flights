@@ -10,6 +10,7 @@ mod db;
 mod cors;
 mod planes;
 mod airports;
+mod routes;
 
 use rocket::{Build, Rocket};
 
@@ -52,7 +53,8 @@ pub fn create_server() -> Rocket<Build> {
         "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes,
                                                                 planes::routes_with_plane_model],
         "/airports" => openapi_get_routes_spec![openapi_settings: airports::get_all_airports,
-                                                                  airports::distance_limit]
+                                                                  airports::distance_limit],
+        "/routes" => openapi_get_routes_spec![openapi_settings: routes::airline_routes]
     };
 
     building_rocket
