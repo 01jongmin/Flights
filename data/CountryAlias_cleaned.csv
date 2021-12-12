@@ -1,0 +1,999 @@
+,code,alias
+0,AF,Afghanistan
+1,AF,Islamic Republic of Afghanistan
+2,AF,Da Afganistan Islami Jumhoryat
+3,AF,Jomhuriyyeh Eslamiyyeh Afganestan
+4,AL,Albania
+5,AL,Republic of Albania
+6,AL,Republika e Shqipërisë
+7,AL,Arnavutluk
+8,AL,Arbanon
+9,DZ,Algeria
+10,DZ,People's Democratic Republic of Algeria
+11,DZ,al-Jaza’ir
+12,DZ,al Jumhuriyya al Jazaa'iriyya ad-Dimuqratiyya ash Sha'biyya
+13,AR,Argentina
+14,AR,Argentine Republic
+15,AR,la Argentina
+16,AR,the Argentine
+17,AR,Argentine Nation
+18,AR,United Provinces of the Río de la Plata
+19,AR,Argentine Confederation
+20,AM,Armenia
+21,AM,Hayastan
+22,AM,Republic of Armenia
+23,AU,Australia
+24,AU,Commonwealth of Australia
+25,AU,New Holland
+26,AT,Austria
+27,AT,Republic of Austria
+28,AT,Republik Österreich
+29,AT,Österreich
+30,AZ,Azerbaijan
+31,AZ,Az?ebaycan Respublikasi
+32,AZ,Republic of Azerbaijan
+33,BS,The Bahamas
+34,BS,Commonwealth of The Bahamas
+35,BS,Commonwealth of the Bahama Islands
+36,BS,Bahama Islands
+37,BH,Bahrain
+38,BH,Kingdom of Bahrain
+39,BH,Mamlakat al-Bahrayn
+40,BH,State of Bahrain
+41,BD,Bangladesh
+42,BD,People's Republic of Bangladesh
+43,BD,Bengal Presidency
+44,BD,East Bengal
+45,BD,East Pakistan
+46,BB,Barbados
+47,BB,Bim
+48,BB,Bimshire
+49,BB,Little England
+50,BB,The Rock
+51,BY,Belarus
+52,BY,Republic of Belarus
+53,BY,Gudija
+54,BY,Byelorussia
+55,BY,White Russia
+56,BE,Belgium
+57,BE,Kingdom of Belgium
+58,BE,Koninkrijk België
+59,BE,Royaume de Belgique
+60,BE,Königreich Belgien
+61,BZ,Belize
+62,BZ,British Honduras
+63,BJ,Benin
+64,BJ,Dahomey
+65,BJ,Republic of Benin
+66,BJ,République du Bénin
+67,BT,Bhutan
+68,BT,Kingdom of Bhutan
+69,BT,Druk Gyal Khap
+70,BO,Bolivia
+71,BO,Plurinational State of Bolivia
+72,BO,Estado Plurinacional de Bolivia
+73,BO,Republic of Bolívar
+74,BO,Republic of Bolivia
+75,BA,Bosnia and Herzegovina
+76,BA,Republic of Bosnia and Herzegovina
+77,BA,Socialist Republic of Bosnia and Herzegovina
+78,BW,Botswana
+79,BW,Bechuanaland
+80,BW,Republic of Botswana
+81,BR,Brazil
+82,BR,Pindorama
+83,BR,Terra de Santa Cruz
+84,BR,Ilha de Vera Cruz
+85,BR,Empire of Brazil
+86,BR,United States of Brazil
+87,BR,Federative Republic of Brazil
+88,BR,República Federativa do Brasil
+89,BR,Terra di Papaga
+90,BN,Brunei
+91,BN,"Nation of Brunei, the Abode of Peace"
+92,BN,State of Brunei
+93,BN,Negara Brunei Darussalam
+94,BN,Brunei Darussalam
+95,BG,Bulgaria
+96,BG,Republic of Bulgaria
+97,BG,People's Republic of Bulgaria
+98,BF,Burkina Faso
+99,BF,Upper Volta
+100,BF,Haute-Volta
+101,BF,Bourkina-Fasso
+102,BI,Burundi
+103,BI,Republic of Burundi
+104,BI,Republika y'Uburundi
+105,BI,République du Burundi
+106,BI,Kingdom of Burundi
+107,KH,Cambodia
+108,KH,Kingdom of Cambodia
+109,KH,Royaume du Cambodge
+110,KH,Kampuchea
+111,KH,Khmer Republic
+112,KH,Democratic Kampuchea
+113,KH,People's Republic of Kampuchea
+114,KH,State of Cambodia
+115,CM,Cameroon
+116,CM,Republic of Cameroon
+117,CM,United Republic of Cameroon
+118,CM,Kamerun
+119,CA,Canada
+120,CA,Dominion of Canada
+121,CA,Dominion du Canada
+122,CA,Acadia
+123,CA,Francisca
+124,CV,Cape Verde
+125,CV,Cabo Verde
+126,CF,Central African Republic
+127,CF,Oubangui-Chari
+128,CF,Ubangi-Shari
+129,CF,République Centrafricaine
+130,CF,Empire Centrafricain
+131,CF,Central African Empire
+132,TD,Chad
+133,TD,Republic of Chad
+134,TD,République du Tchad
+135,TD,Jumhuriyat Tashad
+136,CL,Chile
+137,CL,Republic of Chile
+138,CL,Chilli
+139,CL,Chili
+140,CL,Reyno de Chile
+141,CL,Capitania general de Chile
+142,CN,China
+143,CN,People's Republic of China
+144,CN,Communist China
+145,CN,Red China
+146,CN,Mainland China
+147,CN,New China
+148,CN,"Shenzhou, Ch'in Empire, Cathay"
+149,CN,Zhongguo
+150,CO,Colombia
+151,CO,Republic of Colombia
+152,CO,República de Colombia
+153,CO,Estados Unidos de Colombia
+154,CO,Confederación Granadina
+155,CO,República de la Nueva Granada
+156,KM,Comoros
+157,KM,Union of the Comoros
+158,KM,Union des Comores
+159,KM,Udzima wa Komori
+160,KM,al-Ittihad al-Qumuri
+161,KM,United Republic of the Commoros
+162,CR,Costa Rica
+163,CR,Republic of Costa Rica
+164,CR,República de Costa Rica
+165,CI,Côte d'Ivoire
+166,CI,Ivory Coast
+167,CI,the Ivory Coast
+168,CI,Republic of Côte d'Ivoire
+169,CI,République de Côte d'Ivoire
+170,HR,Croatia
+171,HR,Republic of Croatia
+172,HR,Republika Hrvatska
+173,HR,Hrvatska
+174,HR,Hrvaška
+175,CU,Cuba
+176,CU,Republic of Cuba
+177,CU,República de Cuba
+178,CZ,Czech Republic
+179,CZ,Czechia
+180,CZ,Ceská republika
+181,CZ,Cesko
+182,CZ,CR
+183,CZ,CR
+184,CZ,Bohemia
+185,CZ,Czechland
+186,CZ,the Czechlands
+187,CZ,Ceské zeme
+188,CZ,Former Ceská socialistická republika
+189,CZ,CSR
+190,CZ,CSR
+191,CZ,Cechy a Morava
+192,CZ,Zeme Koruny ceské
+193,CZ,Koruna ceská
+194,CZ,Ceská konfederace
+195,DK,Denmark
+196,DK,Danmark
+197,DK,Kingdom of Denmark
+198,DK,Kongeriget Danmark
+199,CD,Democratic Republic of Congo
+200,CD,Zaire
+201,CD,DRC
+202,CD,Congo Kinshasa
+203,CD,Belgian Congo
+204,CD,Congo belge
+205,CD,Congo Free State
+206,CD,Republic of the Congo
+207,DJ,Djibouti
+208,DJ,"French Territory of the Afars and the Issas, French Somaliland, Obock Territory"
+209,DJ,"Territoire français des Afars et des Issas, Côte française des Somalis, Territoire d'Obock"
+210,DJ,Republic of Djibouti
+211,DJ,République de Djibouti
+212,TL,East Timor
+213,TL,Timor-Leste
+214,TL,Democratic Republic of Timor-Leste
+215,EG,Egypt
+216,EG,Misr
+217,EG,Mess
+218,EG,Aegyptus
+219,EG,Kimi
+220,EG,Arab Republic of Egypt
+221,EE,Estonia
+222,EE,Eesti
+223,EE,Viru
+224,EE,Viro
+225,EE,Estland
+226,EE,Maarjamaa
+227,EE,Igaunija
+228,SZ,Eswatini
+229,SZ,Swaziland
+230,SZ,eSwatini
+231,SZ,Kingdom of Eswatini
+232,ET,Ethiopia
+233,ET,Abyssinia
+234,ET,Habeshastan
+235,ET,Federal Democratic Republic of Ethiopia
+236,ET,Ethiopië
+237,ET,Al-Habasha
+238,FI,Finland
+239,FI,Republic of Finland
+240,FI,Suomi
+241,FI,Suomen tasavalta
+242,FI,Republiken Finland
+243,FI,Suomenmaa
+244,FI,Suopma and Suoma dásseváldi
+245,FI,Lää´ddjânnam and Lää´ddjânnam tää´ssvä´ldd
+246,FI,Suomâ and Suomâ täsiväldi
+247,FI,Soome
+248,FR,France
+249,FR,French Republic
+250,FR,République Française
+251,FR,L'Hexagone
+252,FR,Gaul
+253,FR,Gaule
+254,FR,Gallia
+255,FR,Farança
+256,FR,Tsarfat
+257,GA,Gabon
+258,GA,Gabonese Republic
+259,GE,Georgia
+260,GE,Iberia
+261,GE,Colchis
+262,GE,Iveria
+263,GE,Republic of Georgia
+264,GE,Sakartvelo
+265,DE,Germany
+266,DE,Federal Republic of Germany
+267,DE,Bundesrepublik Deutschland
+268,DE,Deutschland
+269,DE,BRD
+270,DE,FRG
+271,DE,Duitsland
+272,DE,Allemagne
+273,DE,Alemania
+274,DE,Germania
+275,DE,Nemecko
+276,DE,Niemcy
+277,DE,Németország
+278,DE,Former East Germany
+279,DE,Deutsche Demokratische Republik
+280,DE,German Democratic Republic
+281,DE,DDR
+282,DE,GDR
+283,GH,Ghana
+284,GH,Gold Coast
+285,GH,United Gold Coast Convention
+286,GH,Ghana Tinzuyu
+287,GH,Gaana
+288,GR,Greece
+289,GR,Hellas
+290,GR,Hellada
+291,GR,Hellas
+292,GR,Yunanistan
+293,GR,Hellenic Republic
+294,GR,Yavan
+295,GN,The Republic of Guinea
+296,GN,Guinea
+297,GW,Guinea-Bissau
+298,GW,Portuguese Guinea
+299,GW,Republic of Guinea-Bissau
+300,GW,Guiné-Bissao
+301,GW,Guinea
+302,HU,Hungary
+303,HU,Republic of Hungary
+304,HU,Hungarian People's Republic
+305,HU,Kingdom of Hungary
+306,HU,Regnum Hungari
+307,HU,Hungaria
+308,HU,Magyarország
+309,HU,Magyar Köztársaság
+310,HU,Magyar Népköztársaság
+311,HU,Magyar Tanácsköztársaság
+312,HU,Magyar Királyság
+313,IS,Iceland
+314,IS,Republic of Iceland
+315,IS,Ísland
+316,IS,Lýðveldið Ísland
+317,IS,Fold
+318,IS,Thule
+319,IS,Frón
+320,IS,Ísafold
+321,IN,India
+322,IN,Bharat
+323,IN,Bharat Ganarajya
+324,IN,Bharata
+325,IN,Bharatadesam
+326,IN,Republic of India
+327,IN,Union of India
+328,IN,Hindustan
+329,IN,Al-Hind
+330,IN,Bharat Prajatantra
+331,IN,Bharatavarsa
+332,IN,Hodu
+333,IN,Aryavarta
+334,IN,Jumhuriyat-e Bharat
+335,ID,Indonesia
+336,ID,Republic of Indonesia
+337,ID,Republik Indonesia
+338,ID,Nusantara
+339,ID,Insulinde
+340,ID,Indunesia
+341,ID,Indonesië
+342,ID,Dutch East Indies or Netherlands East-Indies
+343,ID,Nederlandsch-Indië
+344,ID,Hindia Belanda
+345,IR,Islamic Republic or Iran
+346,IR,Iran
+347,IR,Persia
+348,IQ,Iraq
+349,IQ,Mesopotamia
+350,IQ,Assyria
+351,IQ,Babylon
+352,IE,Ireland
+353,IE,Éire
+354,IE,Irish Free State
+355,IE,Poblacht na hÉireann
+356,IE,Republic of Ireland
+357,IE,Saorstát Éireann
+358,IE,"Erin, Banba, Fodla"
+359,IE,Hibernia
+360,IL,Israel
+361,IL,State of Israel
+362,IL,Zion
+363,IL,Yehuda
+364,IL,the Jewish State
+365,IL,the Hebrew State
+366,IL,the Holy Land
+367,IL,Eretz Yisrael
+368,IL,Tel Aviv regime
+369,IL,the Zionist entity
+370,IL,Occupied Palestine
+371,IL,Illegal State of Zion
+372,IL,Zionistan
+373,IL,Herzlstan
+374,IT,Italy
+375,IT,Repubblica Italiana
+376,IT,Italia
+377,IT,the Beautiful Country
+378,IT,the Boot
+379,IT,"Ausonia, Esperia, Enotria, Tirrenia"
+380,JM,Jamaica
+381,JM,Xamayca
+382,JP,Japan
+383,JP,Nippon
+384,JP,Nihon
+385,JP,Yamato
+386,JP,Oyashima
+387,JP,Cipangu/Zipangu
+388,JP,Gipangu
+389,JP,Hinomoto
+390,JO,Jordan
+391,JO,Hashemite Kingdom of Jordan
+392,KZ,Kazakhstan
+393,KZ,Republic of Kazakhstan
+394,KZ,Kazakhstan
+395,KZ,Republic of Kazakhstan
+396,KZ,Qazaqstan
+397,KZ,Alash / ???? / Alas
+398,KZ,Kazakh Soviet Socialist Republic
+399,KE,Kenya
+400,KE,Republic of Kenya
+401,KE,Jamhuri ya Kenya
+402,KE,British East Africa Protectorate
+403,KE,Kenya Colony
+404,KP,North Korea
+405,KP,Democratic People's Republic of Korea
+406,KP,D.P.R.K.
+407,KP,DPRK
+408,KP,Choson Minjujuui Inmin Konghwaguk
+409,KP,Cho-son
+410,KP,Korea
+411,KR,South Korea
+412,KR,Republic of Korea
+413,KR,R.O.K.
+414,KR,ROK
+415,KR,Dae-han-min-guk
+416,KR,Han-guk
+417,KR,Korea
+418,KR,Korea Republic
+419,KG,Kyrgyzstan
+420,KG,Kyrgyz Republic
+421,KG,Kyrgyz Respublikasy
+422,KG,Kyrgyzskaya Respublika
+423,KG,Kirghiz Soviet Socialist Republic
+424,KG,Kyrgyz Sovettik Sotsialisttik Respublikasy
+425,KG,Kirgizskaya Sovetskaya Sotsialisticheskaya Respublika
+426,KG,Kirghizia
+427,KG,Kirgizstan
+428,KG,Republic of Kyrgyzstan
+429,LA,Laos
+430,LA,Lao People's Democratic Republic
+431,LA,Sathalanalat Paxathipatai Paxaxôn
+432,LA,République démocratique populaire lao
+433,LV,Latvia
+434,LV,Latvija
+435,LV,Lettland
+436,LV,Letland
+437,LV,Letonija
+438,LV,Letonnie
+439,LB,Lebanon
+440,LB,The Lebanese Republic
+441,LB,Al-Jumhuriyya Al-Lubnaniyya
+442,LB,Lebnan
+443,LB,Lubnan
+444,LB,Liban
+445,LB,Levanon
+446,LS,Lesotho
+447,LS,Basutoland
+448,LS,Kingdom of Lesotho
+449,LT,Lithuania
+450,LT,Lietuva
+451,LT,Lietuvos Respublika
+452,LT,Lita
+453,LU,Luxembourg
+454,LU,Grand Duchy of Luxembourg
+455,LU,Groussherzogdem Lëtzebuerg
+456,LU,Lëtzebuerg
+457,LU,Grand-Duché de Luxembourg
+458,LU,Luxembourg
+459,LU,Großherzogtum Luxemburg
+460,LU,Luxemburg
+461,LU,Luxemburgo
+462,LU,Lussemburgo
+463,MG,Madagascar
+464,MG,Madagasikara
+465,MG,Republic of Madagascar
+466,MG,Repoblikan'i Madagasikara
+467,MG,République de Madagascar
+468,MW,Malawi
+469,MW,Nyasaland
+470,MW,Republic of Malawi
+471,MY,Malaysia
+472,MY,Persekutuan Malaysia
+473,MY,Federation of Malaysia
+474,MY,"Malaya, Sabah and Sarawak"
+475,MY,Tanah Melayu or Malay Land
+476,MY,Maláixiyà
+477,MY,Malesiya
+478,MV,Maldives
+479,MV,Republic of the Maldives
+480,MV,The Maldive Islands
+481,MV,Dhivehi Raajje
+482,MV,Mahal Dvipa
+483,MV,Maléldvipa
+484,MV,Dhibat-al-Mahal
+485,MR,Mauritania
+486,MR,Islamic Republic of Mauritania
+487,MR,République Islamique de Mauritanie
+488,MX,Mexico
+489,MX,United Mexican States
+490,MX,Estados Unidos Mexicanos
+491,MX,México
+492,MX,República Mexicana
+493,MX,Méjico
+494,MX,MEX
+495,MX,MX
+496,MX,Aztlán
+497,MX,Aztlan
+498,MD,Moldova
+499,MD,Republic of Moldova
+500,MD,Republica Moldova
+501,MD,Moldavian Soviet Socialist Republic
+502,MD,"Bessarabia, Bassarabia"
+503,MD,Bogdan
+504,MD,Moldavia
+505,MD,Moldau
+506,MA,Morocco
+507,MA,Kingdom of Morocco
+508,MA,Al Mamkaka Al Maghribiya
+509,MA,Maghreb
+510,ME,Montenegro
+511,ME,Crna Gora
+512,ME,Republic of Montenegro
+513,ME,Republika Crna Gora
+514,ME,Mali i Zi
+515,ME,Karadag
+516,ME,Duklja
+517,ME,Zeta
+518,ME,Black Mountain
+519,MM,Myanmar
+520,MM,Republic of the Union of Myanmar
+521,MM,Burma
+522,NL,Netherlands
+523,NL,Kingdom of the Netherlands
+524,NL,Koninkrijk der Nederlanden
+525,NL,Nederland
+526,NL,Holland
+527,NL,Batavia
+528,NL,Pays-Bas
+529,NP,Nepal
+530,NP,Federal Democratic Republic Of Nepal
+531,NZ,New Zealand
+532,NZ,Aotearoa
+533,NZ,Realm of New Zealand
+534,NZ,Dominion of New Zealand
+535,MK,North Macedonia
+536,MK,Republic of North Macedonia
+537,MK,Republic of Macedonia
+538,MK,The former Yugoslav Republic of Macedonia
+539,MK,Paeonia
+540,MK,Vardar Banovina
+541,NO,Norway
+542,NO,Norge
+543,NO,Noreg
+544,NO,Kingdom of Norway
+545,NO,Kongeriket Norge
+546,NO,Kongeriket Noreg
+547,OM,Oman
+548,OM,Sultanate of Oman
+549,PK,Pakistan
+550,PK,Islamic Republic of Pakistan
+551,PK,Federation of Pakistan
+552,PK,Dominion of Pakistan
+553,PK,West Pakistan
+554,PK,Sindhustan and Indoscythia
+555,PK,Mumlikat-e Khudadaad Pakistan
+556,PW,Palau
+557,PW,Republic of Palau
+558,PW,Belau
+559,PS,Palestine
+560,PS,State of Palestine
+561,PS,Medinat Palestina
+562,PS,Dawlat Filastin
+563,PS,the Holy Land
+564,PS,Eretz Yisrael
+565,PS,Filastin
+566,PS,Palestina
+567,PS,Palestinian National Authority
+568,PS,as-Sul?a al-Filastiniya
+569,PS,West Bank and Gaza Strip
+570,PS,Palestinian territories
+571,PS,al-Aradi al-Filastiniyya
+572,PS,Occupied Palestinian Territory / Occupied Palestinian Territories
+573,PS,Israeli-occupied territories
+574,PS,Mandatory Palestine
+575,PE,Peru
+576,PE,Republic of Peru
+577,PE,República del Perú
+578,PE,Perú
+579,PE,Peruvian Republic
+580,PE,República Peruana
+581,PH,Philippines
+582,PH,Repúblika ng Pilipinas
+583,PH,Republic of the Philippines
+584,PH,Pilipinas
+585,PH,Filipinas
+586,PH,Las Islas Filipinas
+587,PH,Las Islas Felipenas
+588,PH,Pinás
+589,PH,PH
+590,PH,Philippine Islands
+591,PH,Filipina
+592,PH,Haríng Bayang Katagalugan
+593,PH,Islas de San Lázaro
+594,PL,Poland
+595,PL,Republic of Poland
+596,PL,Rzeczpospolita Polska
+597,PL,Polska
+598,PL,RP
+599,PL,People's Republic of Poland
+600,PL,Polska Rzeczpospolita Ludowa
+601,PL,Rzeczpospolita
+602,PL,Polish–Lithuanian Commonwealth
+603,PL,Rzeczpospolita Obojga Narodów
+604,PL,United Commonwealth of the Two Nations
+605,PL,Polonia
+606,PL,Lechia
+607,PT,Portugal
+608,PT,Portuguese Republic
+609,PT,Lusitania
+610,PT,Galaico-Portuguese nation
+611,PT,Portucale from the Gallaeci tribe
+612,PT,Galician-Portuguese
+613,PT,Ophiussa
+614,PT,Ophiusa
+615,PT,Portugalensis patrie
+616,PT,Portugalensium patrie and Portugaliae
+617,PT,Regno Portugalensium
+618,PT,Portugalis
+619,PT,Portugalliae et Algarbiae
+620,PT,"Portugalliae, Lusitaniae"
+621,PT,Purtugall
+622,PT,Burtughal
+623,PT,Portingall
+624,PT,Portingal
+625,PT,Ocidental Praia Lusitana
+626,PT,Pátria Lusitana
+627,PT,Luxitania
+628,PT,Portugraal
+629,PR,Puerto Rico
+630,PR,Estado Libre Asociado de Puerto Rico
+631,PR,Commonwealth of Puerto Rico
+632,PR,Porto Rico
+633,PR,Associated Free State of Puerto Rico
+634,PR,"Borikén, Borinquen, or Borinken"
+635,CG,Republic of the Congo
+636,CG,Congo
+637,CG,Congo Brazzaville
+638,CG,French Congo
+639,RO,Romania
+640,RO,România
+641,RO,Rumania or Roumania
+642,RO,Kingdom of Romania
+643,RO,Regatul României
+644,RO,Romanian People's Republic
+645,RO,Republica Populara Romîna
+646,RO,Socialist Republic of Romania
+647,RO,Republica Socialista România
+648,RU,Russian Federation
+649,RU,Russia
+650,RU,"Russland,"
+651,RU,Rossiya
+652,RU,RF
+653,RU,Russian Socialist Federative Soviet Republic
+654,RU,Russian Soviet Federative Socialist Republic
+655,RU,RSFSR
+656,RU,Soviet Union
+657,RU,Union of Soviet Socialist Republics
+658,RU,USSR
+659,RU,Soyuz Sovetskikh Sotsialisticheskikh Respublik
+660,RU,SSSR
+661,RU,SU
+662,RU,Sovetskiy Soyuz
+663,RU,Rus
+664,RU,Great Russia
+665,RW,Rwanda
+666,RW,Rwandese Republic
+667,RW,Republic of Rwanda
+668,RW,République du Rwanda
+669,RW,Repubulika y'u Rwanda
+670,RW,Pays des mille collines
+671,RW,Ruanda
+672,KN,Saint Kitts and Nevis
+673,KN,Federation of Saint Kitts and Nevis
+674,KN,Federation of Saint Christopher and Nevis
+675,KN,Saint Christopher and Nevis
+676,KN,Saint Christopher-Nevis-Anguilla
+677,KN,Saint Kitts-Nevis-Anguilla
+678,KN,Saint Kitts or Saint Christopher
+679,KN,Liamuiga and Oualie
+680,VC,Saint Vincent and the Grenadines
+681,VC,Hairouna
+682,SA,Saudi Arabia
+683,SA,Kingdom of Saudi Arabia
+684,SA,KSA
+685,SA,Saudia
+686,SA,Al-Mamlaka al-Arabiyya as-Saudiyya
+687,SA,"Hijaz, Saudi regime"
+688,SA,Arav haSa'udit
+689,RS,Serbia
+690,RS,Republic of Serbia
+691,RS,Servia
+692,RS,Srbija
+693,RS,Republika Srbija
+694,RS,Serbia and Montenegro
+695,RS,Yugoslavia
+696,RS,Raška
+697,RS,Serboslavia
+698,SG,Singapore
+699,SG,Republic of Singapore
+700,SG,Singapura
+701,SG,Sinhapura
+702,SG,Xinjiapo
+703,SG,Cinjkappur
+704,SG,Pulau Ujong
+705,SG,Shonan-to
+706,SG,little red dot
+707,SK,Slovakia
+708,SK,Slovak Republic
+709,SK,Slovensko
+710,SK,Slovenská republika
+711,SK,SR
+712,SK,Slovak Socialist Republic
+713,SK,Slovenská socialistická republika
+714,SK,SSR
+715,SI,Slovenia
+716,SI,Republic of Slovenia
+717,SI,Slovenija
+718,SI,Republika Slovenija
+719,SI,RS
+720,ZA,South Africa
+721,ZA,"Azania, Mzansi"
+722,ZA,Suid-Afrika
+723,ZA,Zuid-Afrika
+724,ZA,Union of South Africa
+725,ES,Spain
+726,ES,España
+727,ES,Kingdom of Spain
+728,ES,Reino de España
+729,ES,Espanya
+730,ES,Hispania
+731,ES,Espainia
+732,ES,Spanish State
+733,ES,La piel de toro
+734,ES,La pell de brau
+735,ES,Las Batuecas
+736,ES,Iberia
+737,ES,Sepharad
+738,LK,Sri Lanka
+739,LK,Ceylon
+740,LK,Democratic Socialist Republic of Sri Lanka
+741,LK,Heladiva
+742,LK,Ratnadeepa
+743,LK,elangai
+744,LK,Taprobane
+745,SD,Sudan
+746,SD,Republic of the Sudan
+747,SD,The Sudan
+748,SD,Anglo-Egyptian Sudan
+749,SD,Mahdist State
+750,SD,Nubia
+751,SR,Suriname
+752,SR,Dutch Guiana
+753,SR,Netherlands Guiana
+754,SR,Republic of Suriname
+755,SR,Republiek Suriname
+756,SR,Surinam
+757,SE,Sweden
+758,SE,Sverige
+759,SE,Konungariket Sverige
+760,SE,Kingdom of Sweden
+761,SE,Svea Rike
+762,SE,Thule
+763,SE,Svitjod
+764,CH,Switzerland
+765,CH,Swiss Confederation
+766,CH,Schweiz
+767,CH,Schweizerische Eidgenossenschaft
+768,CH,Suisse
+769,CH,Confédération suisse
+770,CH,Svizzera
+771,CH,Confederazione Svizzera
+772,CH,Svizra
+773,CH,Confederaziun Svizra
+774,CH,"Confoederatio Helvetica, Helvetia"
+775,CH,CH
+776,TW,Taiwan
+777,TW,Republic of China
+778,TW,Taiwan
+779,TW,ROC
+780,TW,Chinese Taipei
+781,TW,Zhonghuá Táibei
+782,TW,"Separate Customs Territory of Taiwan, Penghu, Kinmen and Matsu"
+783,TW,"Taipei, China"
+784,TW,"Taiwan, Province of China"
+785,TW,Nationalist China
+786,TW,Free China
+787,TW,Formosa
+788,TW,Cathay
+789,TW,Zhongguo
+790,TW,Qing dynasty
+791,TZ,Tanzania
+792,TZ,United Republic of Tanganyika and Zanzibar
+793,TZ,United Republic of Tanzania
+794,TZ,Deutsch-Ostafrika
+795,TZ,Ruanda and Urundi
+796,TH,Thailand
+797,TH,Siam
+798,TH,Kingdom of Thailand
+799,TT,Trinidad and Tobago
+800,TT,Iere
+801,TT,Republic of Trinidad and Tobago
+802,TT,Trinbago
+803,TN,Tunisia
+804,TN,Republic of Tunisia
+805,TR,Turkey
+806,TR,Republic of Turkey
+807,TR,Türkiye Cumhuriyeti
+808,TR,Asia Minor
+809,TR,Anatolia
+810,TR,Ottoman Empire
+811,TR,Turkish Empire
+812,TR,Porte or Sublime Porte
+813,TV,Tuvalu
+814,TV,Ellice Islands
+815,UA,Ukraine
+816,UA,UA
+817,UA,UKR
+818,UA,Kievan Rus
+819,UA,Kingdom of Galicia–Volhynia
+820,UA,Kingdom of Ruthenia
+821,UA,Zaporizhian Host
+822,AE,United Arab Emirates
+823,AE,United Arab Emirates
+824,AE,Trucial States
+825,AE,Al Emirat al Arabbiya al Muttahida
+826,AE,UAE
+827,AE,U.A.E.
+828,AE,The Emirates
+829,GB,United Kingdom
+830,GB,United Kingdom of Great Britain and Northern Ireland
+831,GB,Britain
+832,GB,Great Britain
+833,GB,UK
+834,GB,U.K.
+835,GB,United Kingdom
+836,GB,Albion
+837,GB,Britannia
+838,GB,Perfidious Albion
+839,GB,Anglia
+840,GB,Alba
+841,GB,Caledonia
+842,GB,Cymru
+843,GB,Cambria
+844,GB,Ulster
+845,US,United States
+846,US,United States of America
+847,US,America
+848,US,the States
+849,US,US
+850,US,U.S.
+851,US,USA
+852,US,Usa
+853,US,U.S.A
+854,US,Columbia
+855,US,Freedonia
+856,US,Appalachia
+857,US,Alleghany
+858,US,Usonia
+859,US,Usono
+860,VU,Vanuatu
+861,VU,New Hebrides
+862,VU,Niuhebridis
+863,VU,Nouvelles Hebrides
+864,VU,République de Vanuatu
+865,VU,Ripablik blong Vanuatu
+866,VU,Vanuatri
+867,VN,Vietnam
+868,VN,An Nam
+869,VN,Champa
+870,VN,Giao Chi
+871,VN,French Indochina
+872,VN,Linh Nam
+873,VN,Socialist Republic of Vietnam
+874,VN,North Vietnam
+875,VN,South Vietnam
+876,VN,Cong hòa Xã hoi Chu nghia Viet Nam
+877,VN,Viet Nam
+878,VN,SRV
+879,VN,S.R.V.
+880,VN,VN
+881,VN,V.N.
+882,ZM,Zambia
+883,ZM,Northern Rhodesia
+884,ZM,Republic of Zambia
+885,ZW,Zimbabwe
+886,ZW,Rhodesia or Republic of Rhodesia
+887,ZW,Republic of Zimbabwe
+888,ZW,Southern Rhodesia
+889,BQ,"Bonaire, Saint Eustatius and Saba"
+890,AW,Aruba
+891,AG,Antigua and Barbuda
+892,AO,Angola
+893,AS,American Samoa
+894,AI,Anguilla
+895,AQ,Antarctica
+896,BM,Bermuda
+897,BS,Bahamas
+898,SB,Solomon Islands
+899,BV,Bouvet Island
+900,CD,DR Congo
+901,CG,Congo Republic
+902,KY,Cayman Islands
+903,CC,Cocos (Keeling) Islands
+904,MP,Northern Mariana Islands
+905,CK,Cook Islands
+906,CY,Cyprus
+907,DM,Dominica
+908,DO,Dominican Republic
+909,EC,Ecuador
+910,GQ,Equatorial Guinea
+911,ER,Eritrea
+912,SV,El Salvador
+913,GF,French Guiana
+914,FJ,Fiji
+915,FK,Falkland Islands
+916,FM,"Micronesia, Fed. Sts."
+917,FO,Faeroe Islands
+918,PF,French Polynesia
+919,TF,French Southern Territories
+920,GM,Gambia
+921,GI,Gibraltar
+922,GD,Grenada
+923,GG,Guernsey
+924,GL,Greenland
+925,GP,Guadeloupe
+926,GU,Guam
+927,GT,Guatemala
+928,GY,Guyana
+929,HT,Haiti
+930,HK,Hong Kong
+931,HM,Heard and McDonald Islands
+932,HN,Honduras
+933,IM,Isle of Man
+934,IO,British Indian Ocean Territory
+935,CI,Cote d'Ivoire
+936,JE,Jersey
+937,KI,Kiribati
+938,CX,Christmas Island
+939,KW,Kuwait
+940,LR,Liberia
+941,LY,Libya
+942,MQ,Martinique
+943,MO,Macao
+944,YT,Mayotte
+945,MN,Mongolia
+946,MS,Montserrat
+947,MK,Macedonia
+948,ML,Mali
+949,MC,Monaco
+950,MU,Mauritius
+951,MT,Malta
+952,MZ,Mozambique
+953,NC,New Caledonia
+954,NU,Niue
+955,NF,Norfolk Island
+956,NE,Niger
+957,NG,Nigeria
+958,NR,Nauru
+959,AN,Netherlands Antilles
+960,NI,Nicaragua
+961,PY,Paraguay
+962,PN,Pitcairn
+963,PA,Panama
+964,PG,Papua New Guinea
+965,QA,Qatar
+966,RE,Reunion
+967,MH,Marshall Islands
+968,PM,St. Pierre and Miquelon
+969,KN,St. Kitts and Nevis
+970,SC,Seychelles
+971,SN,Senegal
+972,SH,St. Helena
+973,SL,Sierra Leone
+974,SO,Somalia
+975,SS,South Sudan
+976,LC,St. Lucia
+977,SJ,Svalbard and Jan Mayen Islands
+978,GS,South Georgia and South Sandwich Is.
+979,SY,Syria
+980,TJ,Tajikistan
+981,TC,Turks and Caicos Islands
+982,TK,Tokelau
+983,TO,Tonga
+984,TG,Togo
+985,ST,Sao Tome and Principe
+986,TM,Turkmenistan
+987,UG,Uganda
+988,UY,Uruguay
+989,UZ,Uzbekistan
+990,VC,St. Vincent and the Grenadines
+991,VE,Venezuela
+992,VG,British Virgin Islands
+993,VI,United States Virgin Islands
+994,WF,Wallis and Futuna Islands
+995,EH,Western Sahara
+996,WS,Samoa
+997,YE,Yemen
