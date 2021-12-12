@@ -2,7 +2,7 @@ use rocket::http::Method;
 use rocket_cors::{Cors, AllowedHeaders, AllowedOrigins};
 
 pub fn get_cors_option() -> Cors {
-    let allowed_origins = AllowedOrigins::some_regex(&["https://d32kwfhg1q7nsk.cloudfront.net/*", "http://localhost:*"]);
+    let allowed_origins = AllowedOrigins::all();
 
     rocket_cors::CorsOptions {
         allowed_origins,
