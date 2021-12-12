@@ -4,6 +4,7 @@ import { HashRouter, BrowserRouter, Route, Switch } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import PlayersPage from "./pages/PlayersPage";
+import AirportsPage from "./pages/AirportsPage";
 import "antd/dist/antd.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
