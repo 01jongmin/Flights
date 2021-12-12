@@ -7,7 +7,6 @@ import Home from "./pages/HomePage.js";
 import AlliancesPage from "./pages/AlliancesPage";
 import AirportsPage from "./pages/AirportsPage";
 
-
 class App extends React.Component {
   render() {
     return (
