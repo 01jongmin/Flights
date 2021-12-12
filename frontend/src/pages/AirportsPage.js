@@ -16,6 +16,11 @@ const airportColumns = [
 
 	},
 	{
+		title: "IATA",
+		dataIndex: "iata",
+		key: "iata",
+	},
+	{
 		title: "ICAO",
 		dataIndex: "icao",
 		key: "icao",
@@ -23,8 +28,8 @@ const airportColumns = [
 	{
 		title: "Name",
 		dataIndex: "name",
-		key: "Name",
-		sorter: (a, b) => a.Name.localeCompare(b.Name),
+		key: "name",
+		sorter: (a, b) => a.name.localeCompare(b.name),
 	},
 	{
 		title: "City",
