@@ -17,7 +17,7 @@ const getAirlinesFromAlliance = async (allianceName, pagesize, page) => {
 }
 
 const getAirportsFromAlliance = async (allianceName) => {
-  var res = await fetch(`${prefix}/alliances/${allianceName}|/airports`, {
+  var res = await fetch(`${prefix}/alliances/${allianceName}/airports`, {
     method: "GET",
   });
   return res.json();
