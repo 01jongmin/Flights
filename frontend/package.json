@@ -11,7 +11,9 @@
     "d3-format": "^3.0.1",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
+    "react-country-flag": "^3.0.2",
     "react-dom": "^17.0.2",
+    "react-flag-icon-css": "^1.0.25",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-vis": "^1.11.7",
@@ -25,10 +27,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
