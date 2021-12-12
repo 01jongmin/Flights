@@ -38,7 +38,7 @@ pub struct AirportDistance {
 
 #[openapi(tag="Airports")]
 #[get("/distance_limit?<airport_id>&<hour_limit>")]
-pub async fn alliance_airports(conn: MyDatabase, airport_id: u32, hour_limit: u32) -> Result<Json<Vec<AirportDistance>>, Status> {
+pub async fn distance_limit(conn: MyDatabase, airport_id: u32, hour_limit: u32) -> Result<Json<Vec<AirportDistance>>, Status> {
     let res = conn.run( move |c| {
         let query = format!("
                 WITH accessibleFlights AS (SELECT * FROM Routes WHERE source_id = {}),

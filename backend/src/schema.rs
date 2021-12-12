@@ -43,21 +43,16 @@ table! {
 }
 
 table! {
-    Cities (id) {
-        id -> Integer,
+    Countries (iso_code) {
         name -> Varchar,
-        ascii_name -> Varchar,
-        lat -> Decimal,
-        lon -> Decimal,
-        country -> Char,
-        population -> Nullable<Integer>,
+        iso_code -> Char,
     }
 }
 
 table! {
-    Countries (iso_code) {
+    CountryAliases (country, name) {
+        country -> Char,
         name -> Varchar,
-        iso_code -> Char,
     }
 }
 
@@ -99,6 +94,15 @@ table! {
 }
 
 table! {
+    WeatherStation (id) {
+        id -> Integer,
+        lat -> Decimal,
+        lon -> Decimal,
+        country -> Char,
+    }
+}
+
+table! {
     posts (id) {
         id -> Unsigned<Bigint>,
         title -> Varchar,
@@ -110,21 +114,23 @@ table! {
 joinable!(AirlineAlliances -> Airlines (airline));
 joinable!(AirlineAlliances -> Alliances (alliance));
 joinable!(Airports -> Countries (country));
-joinable!(Cities -> Countries (country));
+joinable!(CountryAliases -> Countries (country));
 joinable!(Landmarks -> Countries (country));
 joinable!(Routes -> Airlines (airline_id));
-joinable!(Weather -> Cities (city_id));
+joinable!(Weather -> WeatherStation (city_id));
+joinable!(WeatherStation -> Countries (country));
 
 allow_tables_to_appear_in_same_query!(
     AirlineAlliances,
     Airlines,
     Airports,
     Alliances,
-    Cities,
     Countries,
+    CountryAliases,
     Landmarks,
     Planes,
     Routes,
     Weather,
+    WeatherStation,
     posts,
 );

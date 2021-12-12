@@ -51,7 +51,8 @@ pub fn create_server() -> Rocket<Build> {
                                                                  weather::get_temp_range_city],
         "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes,
                                                                 planes::routes_with_plane_model],
-        "/airports" => openapi_get_routes_spec![openapi_settings: airports::get_all_airports]
+        "/airports" => openapi_get_routes_spec![openapi_settings: airports::get_all_airports,
+                                                                  airports::distance_limit]
     };
 
     building_rocket
