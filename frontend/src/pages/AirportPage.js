@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Select } from "antd";
 import MenuBar from "../components/MenuBar";
-import { getAirportsFromAlliance, getAirlinesFromAlliance, getCountriesQuery } from "../fetcher";
+import { getAirportsFromAlliance, getAirlinesFromAlliance, getCountryFromCountryCode } from "../fetcher";
 import ReactCountryFlag from "react-country-flag"
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
@@ -42,7 +42,7 @@ class AirportPage extends React.Component {
     }
 
 	componentDidMount() {
-		getCountriesQuery(this.state.selectedAirportCountry).then((res) => {
+		getCountryFromCountryCode(this.state.selectedAirportCountry).then((res) => {
 			this.setState({ countryName: res });
 		});
 		console.log("X");
