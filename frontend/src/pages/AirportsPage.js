@@ -52,12 +52,13 @@ class AirportsPage extends React.Component {
 			matchesPageSize: 10,
 			playersResults: [],
 			pagination: null,
-			tempHighQuery: -20,
-            tempLowQuery: 45,
+			tempLowQuery: -20,
+            tempHighQuery: 45,
 		};
 
 		this.goToAirport = this.goToAirport.bind(this);
 		this.handleTemperatureChange = this.handleTemperatureChange.bind(this)
+		this.filterByTemperature = this.filterByTemperature.bind(this)
 	}
 
 	goToAirport(airportId, airportIata, airportCountry, airportIso) {
@@ -76,8 +77,8 @@ class AirportsPage extends React.Component {
 	}
 
 	filterByTemperature() {
-		alert('Celsius is wrong!');
 		getAirports(1, 100000).then((res) => {
+			console.log('hi')
 			this.setState({ airports: res });
 		});
 	  }
