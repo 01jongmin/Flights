@@ -60,8 +60,8 @@ table! {
     Landmarks (id) {
         id -> Integer,
         name -> Varchar,
-        lat -> Decimal,
-        lon -> Decimal,
+        lat -> Double,
+        lon -> Double,
         imageUrl -> Varchar,
         country -> Char,
     }
