@@ -71,7 +71,7 @@ const getCountryFromCountryCode = async (countryCode) => {
 };
 
 const getLandmarks = async(countryCode) => { 
-  var res = await fetch(`https://api.flights-550.net/landmarks/${countryCode}`, {
+  var res = await fetch(`https://api.flights-550.net/landmarks/?country_code=${countryCode}`, {
     method: "GET",
   });
   return res.json();

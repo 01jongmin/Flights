@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Select } from "antd";
+import { Table, Select, Slider } from "antd";
 import MenuBar from "../components/MenuBar";
 import { getAirports } from "../fetcher";
 import ReactCountryFlag from "react-country-flag"
@@ -53,15 +53,24 @@ class AirportsPage extends React.Component {
 			matchesPageSize: 10,
 			playersResults: [],
 			pagination: null,
+			ratingHighQuery: 100,
+            ratingLowQuery: 0,
 		};
 
 		this.leagueOnChange = this.leagueOnChange.bind(this);
 		this.goToAirport = this.goToAirport.bind(this);
+		this.handleTemperatureChange = this.handleTemperatureChange.bind(this)
 	}
 
 	goToAirport(airportId, airportIata, airportCountry, airportIso) {
 		window.location = `#/airport?id=${airportId}&iata=${airportIata}&country=${airportCountry}&iso=${airportIso}`;
 	}
+
+
+	handleTemperatureChange(value) {
+        this.setState({ ratingLowQuery: value[0] })
+        this.setState({ ratingHighQuery: value[1] })
+    }
 
 	leagueOnChange(value) {
 		// TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
@@ -102,6 +111,11 @@ class AirportsPage extends React.Component {
 					/>
 				</div>
 	
+				<div>
+					<br></br>
+					<label class="d-flex justify-content-center">Temperature</label>
+                    <Slider range defaultValue={[50, 100]} onChange={this.handleTemperatureChange} style={{ width: '50vw', margin: '0 auto' }}/>
+				</div>
 			</div>
 		);
 	}
