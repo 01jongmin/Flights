@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { withScriptjs, withGoogleMap, GoogleMap, Circle } from "react-google-maps";
+import { getAirportsFromAlliance } from "../fetcher";
 
 const Map = withScriptjs(
     withGoogleMap(props => (
         <GoogleMap
-            defaultZoom={12}
+            defaultZoom={5}
             defaultCenter={{ lat: -34.397, lng: 150.644 }}
-            onClick={e => props.onMapClick(e)}
         >
             {props.marks.map((mark, index) => (
                 <Circle
@@ -32,27 +32,25 @@ class ReportsPage extends Component {
         marks: []
     };
 
-    setMark = e => {
-        this.setState({ marks: [...this.state.marks, e.latLng] });
-    };
+    componentDidMount() { 
+        getAirportsFromAlliance('OneWorld').then((res) => {
+            for (var i = 0; i < res.length; i++){
+                this.setState({ marks: [...this.state.marks, {lat: res[i].lat, lng: res[i].lon}] });
+              }
+            console.log(this.state.marks)
+		});
+    }
 
-    deleteMarkS = () => {
-        this.setState({
-            marks: []
-        });
-    };
 
     render() {
         const { marks } = this.state;
         return (
             <div>
-                <button onClick={this.deleteMark}>DELETE MARKS</button>
                 <Map
                     googleMapURL="http://maps.googleapis.com/maps/api/js?key=AIzaSyAK9NIuGRc17jZyiPZUtJOhdjaY4qB9lqs"
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `400px` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
-                    onMapClick={this.setMark}
                     marks={marks}
                 />;
             </div>
