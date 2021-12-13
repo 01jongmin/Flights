@@ -43,9 +43,8 @@ class AirportPage extends React.Component {
 
 	componentDidMount() {
 		getCountryFromCountryCode(this.state.selectedAirportCountry).then((res) => {
-			this.setState({ countryName: res });
+			this.setState({ countryName: res[0].name });
 		});
-		console.log("X");
 
 		console.log(this.state.countryName);
 	}
@@ -62,12 +61,12 @@ class AirportPage extends React.Component {
 
 				<div class="d-flex justify-content-center">
                 	<br></br>
-					<h2> {this.state.selectedAirportIATA }</h2>
+					<h3> {this.state.selectedAirportIATA }</h3>
                 </div>
 
 				<div class="d-flex justify-content-center">
                 	<br></br>
-					<h2> {this.state.countryName } </h2>
+					<h5> {this.state.countryName} </h5>
 					<div><ReactCountryFlag countryCode={this.state.selectedAirportCountry}/></div> 
                 </div>
 
