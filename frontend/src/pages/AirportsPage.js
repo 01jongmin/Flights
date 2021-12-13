@@ -67,8 +67,7 @@ class AirportsPage extends React.Component {
 	}
 
 
-
-	handleRatingChange(value) {
+	handleTemperatureChange(value) {
         this.setState({ ratingLowQuery: value[0] })
         this.setState({ ratingHighQuery: value[1] })
     }
@@ -113,8 +112,9 @@ class AirportsPage extends React.Component {
 				</div>
 	
 				<div>
-					<label>Temperature</label>
-                    <Slider range defaultValue={[50, 100]} onChange={this.handleTemperatureChange} />
+					<br></br>
+					<label class="d-flex justify-content-center">Temperature</label>
+                    <Slider range defaultValue={[50, 100]} onChange={this.handleTemperatureChange} style={{ width: '50vw', margin: '0 auto' }}/>
 				</div>
 			</div>
 		);
