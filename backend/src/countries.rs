@@ -17,7 +17,8 @@ pub async fn get_countries(conn: MyDatabase, name_query: Option<String>) -> Resu
         let query = format!(
             "SELECT DISTINCT Countries.name as name, Countries.iso_code as iso_code FROM Countries
             JOIN CountryAliases CA on Countries.iso_code = CA.country
-            WHERE CA.name LIKE '%{}%'",
+            WHERE CA.name LIKE '%{}%'
+            ORDER BY name",
             name_query
             );
         sql_query(query).load(c)
@@ -26,6 +27,24 @@ pub async fn get_countries(conn: MyDatabase, name_query: Option<String>) -> Resu
     match countries {
         Ok(countries) => Ok(Json(countries)),
         Err(_) => Err(Status::BadRequest),
+    }
+}
+
+#[openapi(tag = "Countries")]
+#[get("/<country_code>")]
+pub async fn get_country_name(conn: MyDatabase, country_code: String) -> Result<Json<Vec<Country>>, Status> {
+    let country = conn.run(move |c| {
+        let query = format!(
+            "SELECT * FROM Countries
+            WHERE Countries.iso_code = '{}'",
+            country_code);
+
+        sql_query(query).load(c)
+    }).await;
+
+    match country {
+        Ok(country) => Ok(Json(country)),
+        Err(_) => Err(Status::BadRequest)
     }
 }
 
@@ -103,8 +122,8 @@ pub struct ManufacturerAirport {
 }
 
 #[openapi(tag = "Countries")]
-#[get("/<country_name>/manufacturer")]
-pub async fn manufacturer_country(conn: MyDatabase, country_name: String) -> Result<Json<Vec<ManufacturerAirport>>, Status> {
+#[get("/<country_code>/manufacturer")]
+pub async fn manufacturer_country(conn: MyDatabase, country_code: String) -> Result<Json<Vec<ManufacturerAirport>>, Status> {
     let res = conn.run( move |c| {
         let query = format!(
             "WITH PlanesByMFT AS (SELECT iata, SUBSTRING_INDEX(name, ' ', 1) AS mft FROM Planes),
@@ -118,16 +137,12 @@ pub async fn manufacturer_country(conn: MyDatabase, country_name: String) -> Res
              minAir AS (SELECT f.country AS country, f.mft AS mft, total, source_id FROM finalTotal f INNER JOIN minVal m ON m.country = f.country AND m.mft = f.mft AND m.max = f.total ORDER BY mft, total, country),
             interFinal AS (SELECT minAir.country AS countryX, mft, total, id, name, city, iata, icao, lat, lon, alt, timezone, dst, tz FROM minAir JOIN Airports ON minAir.source_id = Airports.id AND minAir.country = Airports.country ORDER BY mft, countryX)
             SELECT countryX as country, mft, total, id, name, city, iata, icao, lat, lon FROM interFinal WHERE countryX = '{}'",
-            country_name);
-
+            country_code);
         return sql_query(query).load(c);
     }).await;
 
     match res {
         Ok(res) => Ok(Json(res)),
-        Err(e) => {
-            print!("{}", e);
-            Err(Status::BadRequest)
-        }
+        Err(_) => Err(Status::BadRequest)
     }
  }
