@@ -44,11 +44,6 @@ FlightFinder</NavbarBrand>
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink active href="/Flights/#/matches">
-              Matches
-            </NavLink>
-          </NavItem>
-          <NavItem>
             <NavLink active href="/Flights/#/routeSearch">
               Search
             </NavLink>

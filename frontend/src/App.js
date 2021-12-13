@@ -9,7 +9,6 @@ import AlliancePage from "./pages/AlliancePage";
 import AirportsPage from "./pages/AirportsPage";
 import AirportPage from "./pages/AirportPage";
 import RouteSearchPage from "./pages/RouteSearch";
-import ReportsPage from "./pages/testmap";
 
 class App extends React.Component {
   render() {
@@ -36,9 +35,6 @@ class App extends React.Component {
           </Route>
           <Route exact path="/routeSearch">
             <RouteSearchPage />
-          </Route>
-          <Route exact path="/map">
-            <ReportsPage />
           </Route>
         </Switch>
       </div>
