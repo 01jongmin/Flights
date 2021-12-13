@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import MenuBar from "../components/MenuBar";
-import { getAlliances, getCountriesQuery } from "../fetcher";
+import { getAlliances, getCountriesQuery, getAirportsFromCountry} from "../fetcher";
 import Select from "react-select";
 import "./Dropdown.css";
 import AsyncSelect from "react-select/async";
@@ -36,7 +36,10 @@ class RouteSearchPage extends React.Component {
     this.state = {
       countryOptions: [],
       alliances: [],
-      countryA: "",
+      countrySrc: "",
+	  countryTgt: "",
+	  citySrc: "",
+	  cityTgt: ""
     };
 
     this.goToAlliance = this.goToAlliance.bind(this);
@@ -68,21 +71,19 @@ class RouteSearchPage extends React.Component {
     getAlliances().then((res) => {
       this.setState({ alliances: res });
     });
-    getCountriesQuery("").then((res) => {
-      for (var i = 0; i < res.length; i++) {
-        this.setState({
-          countryOptions: [
-            ...this.state.countryOptions,
-            { value: res[i].value, label: res[i].name },
-          ],
-        });
-      }
-      console.log(this.state.countryOptions);
-    });
+    // getCountriesQuery("").then((res) => {
+    //   for (var i = 0; i < res.length; i++) {
+    //     this.setState({
+    //       countryOptions: [
+    //         ...this.state.countryOptions,
+    //         { value: res[i].value, label: res[i].name },
+    //       ],
+    //     });
+    //   }
+    //   console.log(this.state.countryOptions);
+    // });
   }
 
-  getOptionValue = (option) => option.iso_code;
-  getOptionLabel = (option) => option.name;
 
   render() {
     return (
@@ -92,13 +93,40 @@ class RouteSearchPage extends React.Component {
         <div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
           <h3>Search for Itinerary</h3>
 
+		<div class = 'row'>
+			<div class = 'col'>
           <AsyncSelect
             className="select-search"
             loadOptions={(inputValue) => getCountriesQuery(inputValue)}
-            onChange={(value, option) => console.log(value.value)}
+            onChange={(value, option) => this.setState({countrySrc: value.value})}
             placeholder="Source Country"
           />
-
+		  </div>
+		  <div class = 'col'>
+          <AsyncSelect
+            className="select-search"
+            loadOptions={(inputValue) => getAirportsFromCountry(this.state.countrySrc, inputValue)}
+            onChange={(value, option) => this.setState({citySrc: value.value})}
+            placeholder="Source Country"
+          />
+		  </div>
+		  <div class = 'col'>
+          <AsyncSelect
+            className="select-search"
+            loadOptions={(inputValue) => getCountriesQuery(inputValue)}
+            onChange={(value, option) => this.setState({countryTgt: value.value})}
+            placeholder="Target Country"
+          />
+		  </div>
+		  <div class = 'col'>
+          <AsyncSelect
+            className="select-search"
+            loadOptions={(inputValue) => getAirportsFromCountry(this.state.countryTgt, inputValue)}
+            onChange={(value, option) => this.setState({cityTgt: value.value})}
+            placeholder="Source Country"
+          />
+		  </div>
+		</div>
           {/* <Table
 						onRow={(record, rowIndex) => {
 							return {
