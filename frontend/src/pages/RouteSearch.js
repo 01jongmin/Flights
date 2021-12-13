@@ -1,8 +1,9 @@
 import React from "react";
 import { Table, Select } from "antd";
 import MenuBar from "../components/MenuBar";
-import { getAlliances } from "../fetcher";
+import { getAlliances, getCountriesQuery } from "../fetcher";
 import SelectSearch from 'react-select-search';
+import './Dropdown.css'; 
 
 
 const { Column, ColumnGroup } = Table;
@@ -37,6 +38,7 @@ class RouteSearchPage extends React.Component {
 		};
 		
 		this.goToAlliance = this.goToAlliance.bind(this);
+
 	}
 
 	goToAlliance(allianceId) {
@@ -44,6 +46,14 @@ class RouteSearchPage extends React.Component {
 	}
 
 	leagueOnChange(value) {
+		// TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
+		// then, matchesResults in state should be set to the results returned - see a similar function call in componentDidMount()
+		getAlliances().then((res) => {
+			this.setState({ alliances: res });
+		});
+	}
+
+    countryAOnChange(value) {
 		// TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
 		// then, matchesResults in state should be set to the results returned - see a similar function call in componentDidMount()
 		getAlliances().then((res) => {
@@ -64,7 +74,19 @@ class RouteSearchPage extends React.Component {
 				
 				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
 					<h3>Search for Itinerary</h3>
-					<Table
+                   
+                    <SelectSearch className="select-search"
+        options={[]}
+        value="15997"
+        getOptions={(query) => {
+            console.log(query)
+            return getCountriesQuery(query)
+        }}
+        search
+        placeholder="Your favorite drink"
+    />
+
+					{/* <Table
 						onRow={(record, rowIndex) => {
 							return {
 								onClick: (event) => {
@@ -79,7 +101,7 @@ class RouteSearchPage extends React.Component {
 							defaultPageSize: 5,
 							showQuickJumper: true,
 						}}
-					/>
+					/> */}
 				</div>
 			</div>
 		);
