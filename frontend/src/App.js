@@ -7,6 +7,7 @@ import Home from "./pages/HomePage.js";
 import AlliancesPage from "./pages/AlliancesPage";
 import AlliancePage from "./pages/AlliancePage";
 import AirportsPage from "./pages/AirportsPage";
+import AirportPage from "./pages/AirportPage";
 import RouteSearchPage from "./pages/RouteSearch";
 
 class App extends React.Component {
@@ -28,6 +29,9 @@ class App extends React.Component {
           </Route>
           <Route exact path="/airports">
             <AirportsPage />
+          </Route>
+          <Route exact path="/airport">
+            <AirportPage />
           </Route>
           <Route exact path="/routeSearch">
             <RouteSearchPage />
