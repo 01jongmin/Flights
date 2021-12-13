@@ -29,7 +29,11 @@ const getCountries = async () => {
 }
 
 const getDestinationsFromCountry = async (country) => {
+<<<<<<< Updated upstream
   var res = await fetch(`http://rocket-env.eba-jzvxeuty.us-east-2.elasticbeanstalk.com/countries/destinations?country_name=country`, {
+=======
+  var res = await fetch(`${prefix}/countries/destinations?country_name=${country}`, {
+>>>>>>> Stashed changes
     method: "GET",
   });
   return res.json();
