@@ -128,5 +128,51 @@ pub async fn bfs(conn: MyDatabase, src_id: u32, tgt_id: u32, limit:u32) -> Resul
         Ok(res) => Ok(Json(res)),
         Err(_) => Err(Status::BadRequest),
     }
+}
 
+#[derive(Serialize, QueryableByName, JsonSchema)]
+pub struct BfsRouteResult {
+    #[sql_type="Integer"]
+    pub airport_id: i32,
+    #[sql_type="Integer"]
+    pub distance: i32,
+    #[sql_type="Integer"]
+    pub parent_airport_id: i32,
+    #[sql_type="Integer"]
+    pub route_id: i32,
+}
+
+#[openapi(tag="Airports")]
+#[get("/bfs_route?<src_id>&<limit>")]
+pub async fn bfs_route(conn: MyDatabase, src_id: u32, limit: u32) -> Result<Json<Vec<BfsRouteResult>>, Status> {
+    let res = conn.run( move |c| {
+        let query = format!("
+        WITH RECURSIVE bfs (airport_id, distance, parent_airport_id, route_id) AS (
+            SELECT Routes.source_id, 0, 0, 0
+            FROM Routes
+            WHERE Routes.source_id={}
+            UNION
+            SELECT routes2.target_id, bfs.distance + 1, routes2.source_id, routes2.id
+            FROM bfs
+            JOIN Routes AS routes2 ON bfs.airport_id=routes2.source_id
+            WHERE bfs.airport_id <> routes2.target_id AND bfs.distance + 1 <= {})
+        , temp AS (
+            SELECT airport_id, MIN(distance) as minDist, parent_airport_id
+            FROM bfs
+            GROUP BY airport_id, parent_airport_id
+        )
+        SELECT bfs.airport_id, bfs.distance, bfs.parent_airport_id, bfs.route_id
+        FROM bfs INNER JOIN temp
+        ON bfs.airport_id = temp.airport_id AND bfs.distance = temp.minDist AND bfs.parent_airport_id = temp.parent_airport_id",
+        src_id,
+        limit);
+
+        return sql_query(query).load(c);
+    }).await;
+
+    match res {
+        Ok(res) => Ok(Json(res)),
+        Err(_) => Err(Status::BadRequest),
+    }
+    
 }
