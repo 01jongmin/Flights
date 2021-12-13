@@ -56,11 +56,11 @@ class AirportsPage extends React.Component {
 		};
 
 		this.leagueOnChange = this.leagueOnChange.bind(this);
-		this.goToMatch = this.goToMatch.bind(this);
+		this.goToAirport = this.goToAirport.bind(this);
 	}
 
-	goToMatch(matchId) {
-		window.location = `/matches?id=${matchId}`;
+	goToAirport(airportId, airportIata, airportCountry, airportIso) {
+		window.location = `#/airport?id=${airportId}&iata=${airportIata}&country=${airportCountry}&iso=${airportIso}`;
 	}
 
 	leagueOnChange(value) {
@@ -85,6 +85,13 @@ class AirportsPage extends React.Component {
 				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
 					<h3>Airports</h3>
 					<Table
+						onRow={(record, rowIndex) => {
+							return {
+								onClick: (event) => {
+									this.goToAirport(record.name, record.iata, record.country, record.iso);
+								}, 
+							};
+						}}
 						dataSource={this.state.airports}
 						columns={airportColumns}
 						pagination={{
