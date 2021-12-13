@@ -37,6 +37,13 @@ const getDestinationsFromCountry = async (country) => {
   return res.json();
 }
 
+const getCountryFromCountryCode = async(countryCode) => { 
+  var res = await fetch(`https://api.flights-550.net/countries/${countryCode}`, {
+    method: "GET",
+  });
+  return res.json();
+}
+
 const getPlanes = async () => {
   var res = await fetch(`${prefix}/planes/`, {
     method: "GET",
@@ -66,5 +73,6 @@ getCountries,
 getDestinationsFromCountry,
 getPlanes,
 getRoutesFromPlane,
-getAirports
+getAirports,
+getCountryFromCountryCode
  };
