@@ -11,6 +11,7 @@ mod cors;
 mod planes;
 mod airports;
 mod routes;
+mod landmarks;
 
 use rocket::{Build, Rocket};
 
@@ -47,6 +48,7 @@ pub fn create_server() -> Rocket<Build> {
                                                                    alliances::alliance_airlines,
                                                                    alliances::alliance_airports],
         "/countries" => openapi_get_routes_spec![openapi_settings: countries::get_countries,
+                                                                   countries::get_country_name,
                                                                    countries::get_airports_for_country,
                                                                    countries::destination_count,
                                                                    countries::manufacturer_country],
@@ -57,7 +59,7 @@ pub fn create_server() -> Rocket<Build> {
         "/airports" => openapi_get_routes_spec![openapi_settings: airports::get_all_airports,
                                                                   airports::distance_limit],
         "/routes" => openapi_get_routes_spec![openapi_settings: routes::airline_routes],
-
+        "/landmarks" => openapi_get_routes_spec![openapi_settings: landmarks::get_landmark_countries],
     };
 
     building_rocket

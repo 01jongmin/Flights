@@ -7,21 +7,19 @@ use rocket_okapi::openapi;
 use serde::{Serialize};
 use schemars::JsonSchema;
 
-#[openapi(tag = "Countries")]
-#[get("/?<code>")]
-pub async fn get_landmark_countries(conn: MyDatabase, code: String) -> Result<Json<Vec<Landmark>>, Status> {
-    let countries = conn.run(move |c| {
+#[openapi(tag = "Landmarks")]
+#[get("/?<country_code>")]
+pub async fn get_landmark_countries(conn: MyDatabase, country_code: String) -> Result<Json<Vec<Landmark>>, Status> {
+    let country_landmarks = conn.run(move |c| {
         let query = format!(
-            "SELECT DISTINCT Countries.name as name, Countries.iso_code as iso_code FROM Countries
-            JOIN CountryAliases CA on Countries.iso_code = CA.country
-            WHERE CA.name LIKE '%{}%'",
-            name_query
-            );
+            "SELECT * FROM Landmarks
+            WHERE Landmarks.country = '{}'",
+            country_code);
         sql_query(query).load(c)
     }).await;
 
-    match countries {
-        Ok(countries) => Ok(Json(countries)),
+    match country_landmarks {
+        Ok(country_landmarks) => Ok(Json(country_landmarks)),
         Err(_) => Err(Status::BadRequest),
     }
 }
