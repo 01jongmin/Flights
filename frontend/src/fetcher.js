@@ -33,8 +33,17 @@ const getCountries = async () => {
 const getCountriesQuery = async (country) => { 
   var res = await fetch(`${prefix}/countries/?name_query=${country}`, {
     method: "GET",
-  });
-  return res.json();
+  })
+
+
+  return new Promise((resolve, reject) => {
+    fetch(`${prefix}/countries/?name_query=${country}`)
+        .then(response => response.json())
+        .then((res ) => {
+            resolve(res.map(({ name, iso_code }) => ({ value: iso_code, name: name })))
+        })
+        .catch(reject);
+});
 }
 
 const getDestinationsFromCountry = async (country) => {

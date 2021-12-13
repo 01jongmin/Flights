@@ -35,6 +35,7 @@ class RouteSearchPage extends React.Component {
 
 		this.state = {
 			alliances: [],
+            countryA: ""
 		};
 		
 		this.goToAlliance = this.goToAlliance.bind(this);
@@ -45,20 +46,22 @@ class RouteSearchPage extends React.Component {
 		window.location = `#/alliance?id=${allianceId}`;
 	}
 
-	leagueOnChange(value) {
-		// TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
-		// then, matchesResults in state should be set to the results returned - see a similar function call in componentDidMount()
-		getAlliances().then((res) => {
-			this.setState({ alliances: res });
-		});
-	}
+    getCountryA(countryA) {
+        this.countryA = countryA
+    }
+    
+	// leagueOnChange(value) {
+	// 	// TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
+	// 	// then, matchesResults in state should be set to the results returned - see a similar function call in componentDidMount()
+	// 	getAlliances().then((res) => {
+	// 		this.setState({ alliances: res });
+	// 	});
+	// }
 
     countryAOnChange(value) {
 		// TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
 		// then, matchesResults in state should be set to the results returned - see a similar function call in componentDidMount()
-		getAlliances().then((res) => {
-			this.setState({ alliances: res });
-		});
+		// console.log()
 	}
 
 	componentDidMount() {
@@ -82,8 +85,13 @@ class RouteSearchPage extends React.Component {
             console.log(query)
             return getCountriesQuery(query)
         }}
+        // onFocus = {(query) => {
+        //     console.log(query)
+        // }}
+        onChange={(value, option) => console.log(value)}
         search
-        placeholder="Your favorite drink"
+        placeholder="Source Country"
+        // onChange={this.countryAOnChange}
     />
 
 					{/* <Table
