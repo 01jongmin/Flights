@@ -70,6 +70,13 @@ const getCountryFromCountryCode = async (countryCode) => {
   return res.json();
 };
 
+const getLandmarks = async(countryCode) => { 
+  var res = await fetch(`https://api.flights-550.net/landmarks/${countryCode}`, {
+    method: "GET",
+  });
+  return res.json();
+}
+
 const getPlanes = async () => {
   var res = await fetch(`${prefix}/planes/`, {
     method: "GET",
@@ -94,15 +101,15 @@ const getAirports = async (page, pagesize) => {
   return res.json();
 };
 
-export {
-  getAlliances,
-  getAirlinesFromAlliance,
-  getAirportsFromAlliance,
-  getCountries,
-  getCountriesQuery,
-  getDestinationsFromCountry,
-  getPlanes,
-  getRoutesFromPlane,
-  getAirports,
-  getCountryFromCountryCode,
-};
+export { getAlliances,
+getAirlinesFromAlliance,
+getAirportsFromAlliance, 
+getCountries,
+getCountriesQuery,
+getDestinationsFromCountry,
+getPlanes,
+getRoutesFromPlane,
+getAirports,
+getCountryFromCountryCode,
+getLandmarks
+ };
