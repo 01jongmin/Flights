@@ -87,23 +87,39 @@ pub async fn distance_limit(conn: MyDatabase, airport_id: u32, hour_limit: u32) 
     }
 }
 
-pub async fn nearby_landmarks(conn: MyDatabase, airport_id: u32, hour_limit: u32) -> Result<Json<Vec<AirportDistance>>, Status> {
+
+#[derive(Serialize, QueryableByName, JsonSchema, Debug)]
+pub struct BfsResult {
+    #[sql_type="Integer"]
+    pub id: i32,
+    #[sql_type="Integer"]
+    pub distance: i32,
+}
+
+#[openapi(tag="Airports")]
+#[get("/bfs?<src_id>&<tgt_id>&<limit>")]
+pub async fn bfs(conn: MyDatabase, src_id: u32, tgt_id: u32, limit:u32) -> Result<Json<Vec<BfsResult>>, Status> {
     let res = conn.run( move |c| {
         let query = format!("
-                WITH accessibleFlights AS (SELECT * FROM Routes WHERE source_id = {}),
-                lLatLonFlights AS (SELECT accessibleFlights.id, airline_id, source_id, target_id, lat AS sLat, lon as sLon FROM accessibleFlights JOIN Airports ON accessibleFlights.source_id=Airports.id),
-                rlatLonFlights AS (SELECT lLatLonFlights.id, airline_id, source_id, target_id, sLat, sLon, lat AS aLat, lon as aLon FROM lLatLonFlights JOIN Airports ON lLatLonFlights.target_id=Airports.id),
-                intermediaryCalculation AS (SELECT rlatLonFlights.id, target_id, (alat - slat) * PI() / 180 AS dLat,
-                                                  (alon - slon) * PI() / 180   as dLon,
-                                                  slat * PI() / 180        AS rLat1,
-                                                   alat * PI() / 180        AS rLat2
-                                           FROM rlatLonFlights),
-                distancedirectAir AS (SELECT id, target_id, 6371 * 2 * ATAN2(SQRT(SIN(dLat/2) * SIN (dLat/2) + COS (rLat1) * COS (rLat2) * SIN (dLon/2) * SIN(dLon/2)), SQRT(1-(SIN(dLat/2) * SIN (dLat/2) + COS (rLat1) * COS (rLat2) * SIN (dLon/2) * SIN(dLon/2))))
-                AS distance
-                FROM intermediaryCalculation)
-                SELECT target_id, CAST(MIN(distance) AS Double) as distance,  CAST(MIN(distance/804.67) AS DOUBLE) AS hours FROM distancedirectAir GROUP BY (target_id) HAVING hours < {} ORDER BY hours",
-            airport_id,
-            hour_limit);
+        WITH RECURSIVE bfs (id, distance) AS (
+        SELECT Routes.source_id, 0
+        FROM Routes
+        WHERE Routes.source_id={}
+        UNION
+        SELECT routes2.target_id, bfs.distance + 1
+        FROM bfs
+        JOIN Routes AS routes2 ON bfs.id=routes2.source_id
+        WHERE bfs.id <> routes2.target_id AND bfs.distance + 1 <= {}),
+        d_table(id, distance) AS (
+            SELECT id, MIN(distance) AS dist
+            FROM bfs
+            GROUP BY id
+        ),
+         distTable AS (SELECT id, distance FROM bfs WHERE (id, distance) IN (SELECT * FROM d_table) ORDER BY distance)
+     SELECT * FROM distTable WHERE id={}",
+            src_id,
+            limit,
+            tgt_id);
 
         return sql_query(query).load(c);
     }).await;
@@ -112,4 +128,5 @@ pub async fn nearby_landmarks(conn: MyDatabase, airport_id: u32, hour_limit: u32
         Ok(res) => Ok(Json(res)),
         Err(_) => Err(Status::BadRequest),
     }
+
 }

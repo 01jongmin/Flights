@@ -68,23 +68,48 @@ pub async fn get_average_temp(conn: MyDatabase, city: String, start_m: i32, star
 
 #[derive(Serialize, QueryableByName, JsonSchema)]
 pub struct AverageCityTempResponse {
-    #[sql_type="VarChar"]
-    name: String,
+    #[sql_type="Integer"]
+    airport_id: i32,
     #[sql_type="Double"]
-    temp: f64,
+    avgTemp: f64,
 }
 
+/// - Complex Query
 #[openapi(tag = "Weather")]
 #[get("/city?<low>&<high>")]
 pub async fn get_temp_range_city(conn: MyDatabase, low: f32, high: f32) -> Result<Json<Vec<AverageCityTempResponse>>, Status> {
     let average_city_temp = conn.run(move |c| {
         let query = format!(
-            "WITH averageWeathers AS (SELECT Cities.id AS cid, Cities.name AS name, AVG(temp) AS temp FROM Weather
-            JOIN Cities ON Weather.city_id = Cities.Id
-            GROUP BY Cities.id)
-            SELECT name, temp
-            FROM averageWeathers
-            WHERE temp >= {} AND temp <= {}",
+            "
+            WITH temp1 AS (
+                SELECT A.id as airport_id, A.name as airport_name, WS.id as station_id, A.lat as lat1, WS.lat AS lat2, A.lon as lon1, WS.lon AS lon2
+                FROM Airports as A
+                   JOIN WeatherStation AS WS ON A.country = WS.country
+            ), temp2 AS (
+                SELECT airport_id,
+                       airport_name,
+                       station_id,
+                       (lat2 - lat1) * PI() / 180 AS dLat,
+                       (lon2 - lon1) * PI() / 180   as dLon,
+                       lat1 * PI() / 180        AS rLat1,
+                       lat2 * PI() / 180        AS rLat2
+                FROM temp1
+            ), AiportWeatherStation AS (
+                SELECT airport_id, airport_name, station_id, 6371 * 2* ASIN(SQRT(SIN(dLat/2) * SIN (dLat/2) + COS (rLat1) * COS (rLat2) * SIN (dLon/2) * SIN(dLon/2))) AS distance
+                FROM temp2
+            ), temp3 AS (
+                SELECT airport_id, airport_name, MIN(distance) as minDistance
+                FROM AiportWeatherStation
+                GROUP BY airport_id, airport_name
+            ), minDistance AS (
+                SELECT AWS.airport_id, AWS.airport_name, station_id
+                FROM AiportWeatherStation AWS INNER JOIN temp3
+                ON AWS.airport_id = temp3.airport_id AND AWS.distance = temp3.minDistance
+            )
+            SELECT minDistance.airport_id, AVG(Weather.temp) as avgTemp FROM minDistance
+            JOIN Weather ON minDistance.station_id = Weather.station_id
+            GROUP BY minDistance.airport_id, minDistance.airport_name
+            HAVING avgTemp >= {} AND avgTemp <= {}",
             low,
             high
         );

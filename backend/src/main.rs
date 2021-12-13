@@ -64,7 +64,8 @@ pub fn create_server() -> Rocket<Build> {
                                                                 planes::routes_with_plane_model],
         "/airports" => openapi_get_routes_spec![openapi_settings: airports::get_all_airports,
                                                                   airports::distance_limit,
-                                                                  airports::get_all_airports_query],
+                                                                  airports::get_all_airports_query,
+                                                                  airports::bfs],
         "/routes" => openapi_get_routes_spec![openapi_settings: routes::airline_routes],
         "/landmarks" => openapi_get_routes_spec![openapi_settings: landmarks::get_landmark_countries],
     };
