@@ -30,6 +30,13 @@ const getCountries = async () => {
   return res.json();
 }
 
+const getCountriesQuery = async (country) => { 
+  var res = await fetch(`${prefix}/countries/?name_query=${country}`, {
+    method: "GET",
+  });
+  return res.json();
+}
+
 const getDestinationsFromCountry = async (country) => {
   var res = await fetch(`${prefix}/countries/destinations?country_name=country`, {
     method: "GET",
@@ -63,6 +70,7 @@ export { getAlliances,
 getAirlinesFromAlliance,
 getAirportsFromAlliance, 
 getCountries,
+getCountriesQuery,
 getDestinationsFromCountry,
 getPlanes,
 getRoutesFromPlane,

@@ -48,6 +48,11 @@ FlightFinder</NavbarBrand>
               Matches
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink active href="/Flights/#/routeSearch">
+              Search
+            </NavLink>
+          </NavItem>
           <NavItem className="ml-auto">
       <NavLink active href="#">CIS 550 Project</NavLink>
     </NavItem>
