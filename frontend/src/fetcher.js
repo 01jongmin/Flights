@@ -50,9 +50,25 @@ const getCountriesQuery = async (country) => {
   });
 };
 
+const getAirportsFromCountry = async (country, query) => {
+  var res = await fetch(`${prefix}/airports/${country}?query=${query}`, {
+    method: "GET",
+  });
+  return new Promise((resolve, reject) => {
+    fetch(`${prefix}/airports/${country}?query=${query}`)
+      .then((response) => response.json())
+      .then((res) => {
+        resolve(
+          res.map(({ id, name }) => ({ value: id, label: name }))
+        );
+      })
+      .catch(reject);
+  });
+};
+
 const getDestinationsFromCountry = async (country) => {
   var res = await fetch(
-    `${prefix}/countries/destinations?country_name=country`,
+    `${prefix}/countries/destinations?country_name=${country}`,
     {
       method: "GET",
     }
@@ -111,5 +127,6 @@ getPlanes,
 getRoutesFromPlane,
 getAirports,
 getCountryFromCountryCode,
-getLandmarks
+getLandmarks,
+getAirportsFromCountry
  };
