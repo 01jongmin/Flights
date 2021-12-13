@@ -138,9 +138,6 @@ getRoutesFromPlane,
 getAirports,
 getCountryFromCountryCode,
 getLandmarks,
-<<<<<<< HEAD
-getAirportFromWeather
-=======
+getAirportFromWeather,
 getAirportsFromCountry
->>>>>>> 4b15810505455ccf927f4bef361b1e15c5de567c
  };
