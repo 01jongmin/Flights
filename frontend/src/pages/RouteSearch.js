@@ -1,13 +1,13 @@
 import React from "react";
-import { Table, Select } from "antd";
+import { Table} from "antd";
 import MenuBar from "../components/MenuBar";
 import { getAlliances, getCountriesQuery } from "../fetcher";
-import SelectSearch from 'react-select-search';
+import Select from 'react-select';
 import './Dropdown.css'; 
 
 
 const { Column, ColumnGroup } = Table;
-const { Option } = Select;
+// const { Option } = Select;
 
 const allianceColumns = [
 	{
@@ -34,6 +34,7 @@ class RouteSearchPage extends React.Component {
 		super(props);
 
 		this.state = {
+			countryOptions: [],
 			alliances: [],
             countryA: ""
 		};
@@ -68,7 +69,16 @@ class RouteSearchPage extends React.Component {
 		getAlliances().then((res) => {
 			this.setState({ alliances: res });
 		});
+		getCountriesQuery('').then((res) => {
+			for (var i = 0; i < res.length; i++){
+                this.setState({ countryOptions: [...this.state.countryOptions, {value: res[i].value, label: res[i].name}] });
+              }
+			console.log(this.state.countryOptions)
+		})
 	}
+
+	getOptionValue = (option) => option.iso_code; 
+	getOptionLabel = (option) => option.name; 
 
 	render() {
 		return (
@@ -78,18 +88,15 @@ class RouteSearchPage extends React.Component {
 				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
 					<h3>Search for Itinerary</h3>
                    
-                    <SelectSearch className="select-search"
-        options={[]}
-        value="15997"
-        getOptions={(query) => {
-            console.log(query)
-            return getCountriesQuery(query)
-        }}
+                    <Select className="select-search"
+		options={this.state.countryOptions}
+        // value="15997"
+
         // onFocus = {(query) => {
         //     console.log(query)
         // }}
-        onChange={(value, option) => console.log(value)}
-        search
+        onChange={(value, option) => console.log(value.value)}
+        // search
         placeholder="Source Country"
         // onChange={this.countryAOnChange}
     />
