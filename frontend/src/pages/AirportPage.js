@@ -39,14 +39,16 @@ class AirportPage extends React.Component {
     //}
 
 	componentDidMount() {
+
 		getCountryFromCountryCode(this.state.selectedAirportCountry).then((res) => {
 			this.setState({ countryName: res[0].name });
 		});
 		getLandmarks(this.state.selectedAirportCountry).then((res) => {
+			console.log(this.state.selectedAirportCountry)
 			this.setState({ landmarks: res });
 		});
 
-		console.log(this.state.landmarks);
+		// console.log(this.state.landmarks);
 	}
 
 	render() {
@@ -56,7 +58,7 @@ class AirportPage extends React.Component {
 				
 				<div class="d-flex justify-content-center">
                     <br></br>
-                	<h1> {this.state.selectedAirportName.replaceAll('%20', ' ')}</h1>
+                	<h1> {this.state.selectedAirportName.replaceAll(/%../ig, ' ')}</h1>
                 </div>
 
 				<div class="d-flex justify-content-center">
