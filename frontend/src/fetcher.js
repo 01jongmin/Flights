@@ -77,6 +77,16 @@ const getLandmarks = async(countryCode) => {
   return res.json();
 }
 
+const getAirportFromWeather = async (low, high) => {
+  var res = await fetch(
+    `https://api.flights-550.net/weather/city?low=${low}&high=${high}`,
+    {
+      method: "GET",
+    }
+  );
+  return res.json();
+};
+
 const getPlanes = async () => {
   var res = await fetch(`${prefix}/planes/`, {
     method: "GET",
@@ -111,5 +121,6 @@ getPlanes,
 getRoutesFromPlane,
 getAirports,
 getCountryFromCountryCode,
-getLandmarks
+getLandmarks,
+getAirportFromWeather
  };

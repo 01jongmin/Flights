@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Select, Slider } from "antd";
 import MenuBar from "../components/MenuBar";
-import { getAirports } from "../fetcher";
+import { getAirports, getAirportFromWeather } from "../fetcher";
 import ReactCountryFlag from "react-country-flag"
 
 
@@ -53,8 +53,8 @@ class AirportsPage extends React.Component {
 			matchesPageSize: 10,
 			playersResults: [],
 			pagination: null,
-			ratingHighQuery: 100,
-            ratingLowQuery: 0,
+			tempHighQuery: -20,
+            tempLowQuery: 45,
 		};
 
 		this.leagueOnChange = this.leagueOnChange.bind(this);
@@ -68,8 +68,8 @@ class AirportsPage extends React.Component {
 
 
 	handleTemperatureChange(value) {
-        this.setState({ ratingLowQuery: value[0] })
-        this.setState({ ratingHighQuery: value[1] })
+        this.setState({ tempLowQuery: value[0] })
+        this.setState({ tempHighQuery: value[1] })
     }
 
 	leagueOnChange(value) {
@@ -113,12 +113,17 @@ class AirportsPage extends React.Component {
 	
 				<div>
 					<br></br>
-					<label class="d-flex justify-content-center">Temperature</label>
-                    <Slider range defaultValue={[50, 100]} onChange={this.handleTemperatureChange} style={{ width: '50vw', margin: '0 auto' }}/>
+					<label class="d-flex justify-content-center">Temperature (°C)</label>
+                    <Slider range defaultValue={[-20, 45]} onChange={this.handleTemperatureChange} style={{ width: '50vw', margin: '0 auto' }} min={-20} max={45}/>
+					<br></br>
+					<button  style={{ justifyContent: 'center' }} onClick={filterByTemperature}>Apply</button>
 				</div>
 			</div>
 		);
 	}
 }
+  function filterByTemperature() {
+	alert('Celsius is wrong!');
+  }
 
 export default AirportsPage;
