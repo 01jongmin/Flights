@@ -29,10 +29,16 @@ async fn main() {
     };
 }
 
+#[get("/")]
+fn default() -> String {
+    format!("550 backend")
+}
+
 pub fn create_server() -> Rocket<Build> {
     let mut building_rocket = rocket::custom(db::get_database_figment())
             .attach(db::MyDatabase::fairing())
             .attach(cors::get_cors_option())
+            .mount("/", routes![default])
             .mount("/api", 
                 make_swagger_ui(&SwaggerUIConfig {
                     url: "../openapi.json".to_owned(),
