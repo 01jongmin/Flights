@@ -16,6 +16,7 @@ const landmarkColumns = [
 		title: "Image URL",
 		dataIndex: "imageUrl",
 		key: "imageUrl",
+		render: theImageURL => <img alt={theImageURL} height="100" src={theImageURL} />
 	}
 ];
 
