@@ -50,9 +50,25 @@ const getCountriesQuery = async (country) => {
   });
 };
 
+const getAirportsFromCountry = async (country, query) => {
+  var res = await fetch(`${prefix}/airports/${country}?query=${query}`, {
+    method: "GET",
+  });
+  return new Promise((resolve, reject) => {
+    fetch(`${prefix}/airports/${country}?query=${query}`)
+      .then((response) => response.json())
+      .then((res) => {
+        resolve(
+          res.map(({ id, name }) => ({ value: id, label: name }))
+        );
+      })
+      .catch(reject);
+  });
+};
+
 const getDestinationsFromCountry = async (country) => {
   var res = await fetch(
-    `${prefix}/countries/destinations?country_name=country`,
+    `${prefix}/countries/destinations?country_name=${country}`,
     {
       method: "GET",
     }
@@ -76,6 +92,16 @@ const getLandmarks = async(countryCode) => {
   });
   return res.json();
 }
+
+const getAirportFromWeather = async (low, high) => {
+  var res = await fetch(
+    `https://api.flights-550.net/weather/city?low=${low}&high=${high}`,
+    {
+      method: "GET",
+    }
+  );
+  return res.json();
+};
 
 const getPlanes = async () => {
   var res = await fetch(`${prefix}/planes/`, {
@@ -111,5 +137,7 @@ getPlanes,
 getRoutesFromPlane,
 getAirports,
 getCountryFromCountryCode,
-getLandmarks
+getLandmarks,
+getAirportFromWeather,
+getAirportsFromCountry
  };
