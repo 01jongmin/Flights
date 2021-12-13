@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Flights/static/css/main.468f4dd0.chunk.css",
-    "main.js": "/Flights/static/js/main.27a46fcc.chunk.js",
-    "main.js.map": "/Flights/static/js/main.27a46fcc.chunk.js.map",
+    "main.js": "/Flights/static/js/main.8c75da75.chunk.js",
+    "main.js.map": "/Flights/static/js/main.8c75da75.chunk.js.map",
     "runtime-main.js": "/Flights/static/js/runtime-main.e5f0da8f.js",
     "runtime-main.js.map": "/Flights/static/js/runtime-main.e5f0da8f.js.map",
     "static/css/2.6c08579a.chunk.css": "/Flights/static/css/2.6c08579a.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.6c08579a.chunk.css",
     "static/js/2.15a64773.chunk.js",
     "static/css/main.468f4dd0.chunk.css",
-    "static/js/main.27a46fcc.chunk.js"
+    "static/js/main.8c75da75.chunk.js"
   ]
 }
