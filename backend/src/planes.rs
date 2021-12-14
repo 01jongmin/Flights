@@ -25,7 +25,7 @@ pub async fn routes_with_plane_model(conn: MyDatabase, model_name: String) -> Re
                 JOIN Airports AS SourcePort on SourcePort.id = Routes.source_id
                 JOIN Airports AS DestiPort on Routes.target_id = DestiPort.id
             JOIN Planes P on Routes.plane_id = P.iata
-            WHERE P.name = '{}'",
+            WHERE P.iata = '{}'",
             model_name);
 
         return sql_query(query).load(c);
@@ -46,6 +46,23 @@ pub async fn get_all_planes(conn: MyDatabase) -> Result<Json<Vec<Plane>>, Status
 
     match all_planes {
         Ok(all_planes) => Ok(Json(all_planes)),
+        Err(_) => Err(Status::BadRequest),
+    }
+}
+
+#[openapi(tag = "Planes")]
+#[get("/id?<plane_id>")]
+pub async fn get_plane_by_id(conn: MyDatabase, plane_id: String) -> Result<Json<Vec<Plane>>, Status> {
+    let res = conn.run( move |c| {
+        let query = format!(
+        "SELECT * FROM Planes WHERE iata = '{}'",
+        plane_id);
+
+        return sql_query(query).load(c);
+    }).await;
+
+    match res {
+        Ok(res) => Ok(Json(res)),
         Err(_) => Err(Status::BadRequest),
     }
 }
