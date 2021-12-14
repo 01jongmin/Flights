@@ -22,7 +22,7 @@ const landmarkColumns = [
 
 const airportColumns = [
 	{
-		title: "Airport name",
+		title: "Airport Name",
 		dataIndex: "name",
 		key: "name",
 	},
@@ -60,15 +60,14 @@ const airportColumns = [
 
 const destinationColumns = [
 	{
-		title: "Landmark Name",
+		title: "Country Name",
 		dataIndex: "name",
 		key: "name",
 	},
 	{
-		title: "Image URL",
-		dataIndex: "imageUrl",
-		key: "imageUrl",
-		render: theImageURL => <img alt={theImageURL} height="100" src={theImageURL} />
+		title: "Number of Destination Airports",
+		dataIndex: "count",
+		key: "count",
 	}
 ];
 
@@ -79,7 +78,7 @@ const planespottingColumns = [
 		key: "mft",
 	},
 	{
-		title: "Total number of planes",
+		title: "Total Number of Planes",
 		dataIndex: "total",
 		key: "total",
         sorter: {
@@ -87,7 +86,7 @@ const planespottingColumns = [
           },
 	},
 	{
-		title: "Name of airport",
+		title: "Name of Airport",
 		dataIndex: "name",
 		key: "name",
 	},

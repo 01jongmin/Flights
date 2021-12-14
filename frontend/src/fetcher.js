@@ -82,7 +82,7 @@ const getAirportsFromCountryStandard = async (country, query) => {
 
 const getDestinationsFromCountry = async (country) => {
   var res = await fetch(
-    `${prefix}/countries/destinations?country_name=${country}`,
+    `${prefix}/countries/destinations?country_code=${country}`,
     {
       method: "GET",
     }
