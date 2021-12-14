@@ -3,8 +3,7 @@
 
 mod models;
 mod schema;
-mod alliances;
-mod countries;
+mod alliances; mod countries;
 mod weather;
 mod db;
 mod cors;
@@ -12,6 +11,7 @@ mod planes;
 mod airports;
 mod routes;
 mod landmarks;
+mod airlines;
 
 use rocket::{Build, Rocket};
 
@@ -58,16 +58,19 @@ pub fn create_server() -> Rocket<Build> {
                                                                    countries::get_airports_for_country,
                                                                    countries::destination_count,
                                                                    countries::manufacturer_country],
+        "/airlines" => openapi_get_routes_spec![openapi_settings: airlines::get_airline_by_id],
         "/weather" => openapi_get_routes_spec![openapi_settings: weather::get_average_temp,
                                                                  weather::get_temp_range_city],
         "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes,
                                                                 planes::routes_with_plane_model],
         "/airports" => openapi_get_routes_spec![openapi_settings: airports::get_all_airports,
+                                                                  airports::get_airport_by_id,
                                                                   airports::distance_limit,
                                                                   airports::get_all_airports_query,
                                                                   airports::bfs,
                                                                   airports::bfs_route],
-        "/routes" => openapi_get_routes_spec![openapi_settings: routes::airline_routes],
+        "/routes" => openapi_get_routes_spec![openapi_settings: routes::airline_routes,
+                                                                routes::get_route_by_id],
         "/landmarks" => openapi_get_routes_spec![openapi_settings: landmarks::get_landmark_countries],
     };
 

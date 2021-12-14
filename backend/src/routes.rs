@@ -1,6 +1,7 @@
 use crate::MyDatabase;
 use rocket::http::Status;
 use rocket::serde::json::Json;
+use crate::models::{Route};
 use diesel::{prelude::*, sql_query, sql_types::*};
 use rocket_okapi::openapi;
 use serde::{Serialize};
@@ -56,6 +57,23 @@ pub async fn airline_routes(conn: MyDatabase, airline_id: i32) -> Result<Json<Ve
             JOIN Countries srcT on tgt.country = srcT.iso_code
             WHERE Routes.airline_id = {}",
             airline_id);
+
+        return sql_query(query).load(c);
+    }).await;
+
+    match res {
+        Ok(res) => Ok(Json(res)),
+        Err(_) => Err(Status::BadRequest),
+    }
+}
+
+#[openapi(tag = "Routes")]
+#[get("/?<route_id>")]
+pub async fn get_route_by_id(conn: MyDatabase, route_id: i32) -> Result<Json<Vec<Route>>, Status> {
+    let res = conn.run( move |c| {
+        let query = format!(
+            "SELECT * FROM Routes WHERE id = '{}'",
+            route_id);
 
         return sql_query(query).load(c);
     }).await;
