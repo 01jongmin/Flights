@@ -89,7 +89,7 @@ class AirportPage extends React.Component {
 			selectedAirportIATA: window.location.href.split('=')[2].split('&')[0],
 			selectedAirportCountry: window.location.href.split('=')[3].split('&')[0],
 			selectedAirportId: window.location.href.split('=')[4],
-			hourLimit: 20,
+			hourLimit: 30,
 			isLoaded: false
 		};
         //this.goToAirline = this.goToAirline.bind(this);
