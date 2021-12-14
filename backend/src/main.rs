@@ -11,6 +11,7 @@ mod planes;
 mod airports;
 mod routes;
 mod landmarks;
+mod airlines;
 
 use rocket::{Build, Rocket};
 
@@ -57,6 +58,7 @@ pub fn create_server() -> Rocket<Build> {
                                                                    countries::get_airports_for_country,
                                                                    countries::destination_count,
                                                                    countries::manufacturer_country],
+        "/airlines" => openapi_get_routes_spec![openapi_settings: airlines::get_airline_by_id],
         "/weather" => openapi_get_routes_spec![openapi_settings: weather::get_average_temp,
                                                                  weather::get_temp_range_city],
         "/planes" => openapi_get_routes_spec![openapi_settings: planes::get_all_planes,
