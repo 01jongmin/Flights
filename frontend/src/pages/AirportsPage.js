@@ -55,6 +55,7 @@ class AirportsPage extends React.Component {
 			pagination: null,
 			tempLowQuery: -20,
             tempHighQuery: 45,
+			isLoaded: true
 		};
 
 		this.goToAirport = this.goToAirport.bind(this);
@@ -62,8 +63,8 @@ class AirportsPage extends React.Component {
 		this.filterByTemperature = this.filterByTemperature.bind(this)
 	}
 
-	goToAirport(airportId, airportIata, airportCountry, airportIso) {
-		window.location = `#/airport?id=${airportId}&iata=${airportIata}&country=${airportCountry}&iso=${airportIso}`;
+	goToAirport(airportName, airportIata, airportCountry, airportId) {
+		window.location = `#/airport?name=${airportName}&iata=${airportIata}&country=${airportCountry}&id=${airportId}`;
 	}
 
 	handleTemperatureChange(value) {
@@ -78,6 +79,8 @@ class AirportsPage extends React.Component {
 	}
 
 	async filterByTemperature() {
+		this.setState({ isLoaded: false });
+
 		getAirports(1, 100000).then((res) => {
 			this.setState({ airports: res });
 		});
@@ -85,8 +88,6 @@ class AirportsPage extends React.Component {
 			this.setState({ airportsFiltered: res2 });
 			console.log(this.state.airportsFiltered);
 		});
-
-		
 
 		var temp = [];
 		var index = 0;
@@ -99,16 +100,7 @@ class AirportsPage extends React.Component {
 			}
 		}
 
-		// this.state.airports.forEach((airport) => {
-		// 	this.state.airportsFiltered.forEach((fairport) => {
-		// 		if (airport.id === fairport.airport_id) {
-		// 			temp[index] = airport;
-		// 			index++;
-		// 			console.log(index);
-		// 		}
-		// 	})
-		// })
-		this.setState({airports: temp});
+		this.setState({airports: temp, isLoaded: true });
 		//console.log(this.state.tempLowQuery);
 		//console.log(this.state.tempHighQuery);
 	  }
@@ -117,14 +109,19 @@ class AirportsPage extends React.Component {
 		return (
 			<div>
 				<MenuBar />
-				
+				<div>
+					{this.state.isLoaded ? null :
+						<label class="d-flex justify-content-center">Loading</label>
+					}
+				</div>
 				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
 					<h3>Airports</h3>
+					Click on an Airport row to learn more
 					<Table
 						onRow={(record, rowIndex) => {
 							return {
 								onClick: (event) => {
-									this.goToAirport(record.name, record.iata, record.country, record.iso);
+									this.goToAirport(record.name, record.iata, record.country, record.id);
 								}, 
 							};
 						}}

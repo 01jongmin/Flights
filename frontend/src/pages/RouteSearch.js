@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import MenuBar from "../components/MenuBar";
-import { getNumRoutes, getRoutes, getCountriesQuery, getAirportsFromCountry} from "../fetcher";
+import { getNumRoutes, getRoutes, getCountriesQuery, getAirportsFromCountry, getAirportsFromId, getRouteFromId, getAirlineFromId, getPlanes} from "../fetcher";
 import Select from "react-select";
 import "./Dropdown.css";
 import AsyncSelect from "react-select/async";
@@ -41,20 +41,20 @@ class RouteSearchPage extends React.Component {
 	  cityTgt: "",
 	  numRoutes: "",
 	  routeOne: {},
-	  routeTwo: {}
+	  routeTwo: {},
+	  intermediate: {}
     };
 
 	this.searchForRoute = this.searchForRoute.bind(this);
+	this.cleanRoutes = this.cleanRoutes.bind(this);
   }
 
   async searchForRoute() {
 	await getNumRoutes(this.state.citySrc, this.state.cityTgt).then((res) => {
-		console.log(res)
-		if (res == null) {
+		if (res == null || res == undefined || res[0] == undefined) {
 			this.setState({numRoutes : 0})
 		} else {
 			this.setState({numRoutes : res[0].distance})
-			console.log(this.state.numRoutes)
 		}
 	})
 	if (this.state.numRoutes === 0) {
@@ -62,24 +62,78 @@ class RouteSearchPage extends React.Component {
 	}
 	if (this.state.numRoutes <= 2) {
 		console.log('starting')
-		await getRoutes(this.state.citySrc, this.state.numRoutes).then((res) => {
+		await getRoutes(this.state.citySrc, this.state.numRoutes).then(async (res) => {
 			if (this.state.numRoutes === 1) {
-				this.setState({routeOne : {src: res[1].parent_airport_id, tgt: res[1].airport_id, rid: res[1].route_id}})
+				for (var j = 0; j < res.length; j++){
+				  if (res[j].airport_id == this.state.cityTgt && res[j].parent_airport_id == this.state.citySrc) {
+					  this.setState({routeOne: {src: res[j].parent_airport_id, tgt: res[j].airport_id, rid: res[j].route_id}})
+					  var json = {}
+					  console.log(this.state.routeOne)
+					  await this.cleanRoutes(this.state.routeOne).then((res) => {
+						  json = res
+					  })
+					  this.setState({routeOne: json})
+				  }
+				}
 			} else {
 				for (var i = 0; i < res.length; i++){
 					if (res[i].airport_id == this.state.cityTgt) {
 						this.setState({routeTwo: {src: res[i].parent_airport_id, tgt: res[i].airport_id, rid: res[i].route_id}})
+						this.setState({intermediate: {src: res[i].parent_airport_id, tgt: res[i].airport_id, rid: res[i].route_id}})
+						var json = {}
+						await this.cleanRoutes(this.state.routeTwo).then((res) => {
+							json = res
+						})
+						this.setState({routeTwo: json})
+						break
 					}
 				  }
 				  for (var j = 0; j < res.length; j++){
-					if (res[j].airport_id == this.state.routeTwo.src && res[j].parent_airport_id == this.state.citySrc) {
+					  console.log(this.state.intermediate)
+					if (res[j].airport_id == this.state.intermediate.src && res[j].parent_airport_id == this.state.citySrc) {
 						this.setState({routeOne: {src: res[j].parent_airport_id, tgt: res[j].airport_id, rid: res[j].route_id}})
+						var json = {}
+						console.log(this.state.routeOne)
+						await this.cleanRoutes(this.state.routeOne).then((res) => {
+							json = res
+						})
+						this.setState({routeOne: json})
 					}
 				  }
 			}
-			console.log('done')
 		})
 	}
+  }
+
+  async cleanRoutes(input) {
+	var ret = {}
+	var pid = 0
+	var plane = 0
+	await getAirportsFromId(input.src).then((res) => {
+		ret.src = res[0].name
+	})
+	await getAirportsFromId(input.tgt).then((res) => {
+		ret.tgt = res[0].name
+	})
+	await getRouteFromId(input.rid).then((res) => {
+		pid = res[0].airline_id
+		plane = res[0].plane_id
+	})
+	await getAirlineFromId(pid).then((res) => {
+		ret.airline = res[0].name
+	})
+	await getPlanes().then((res) => {
+		if (plane === null) {
+			ret.plane = 'Unavailable'
+			return
+		}
+		for (var i = 0; i < res.length; i++){
+			if (res[i].iata == plane) {
+				ret.plane = res[i].name
+			}
+		  }
+	})
+	return ret
   }
 
   componentDidMount() {
@@ -89,6 +143,7 @@ class RouteSearchPage extends React.Component {
   render() {
 
 	const renderRoutes = () => {
+		console.log(this.state.routeOne)
 		if (this.state.numRoutes >= 3) {
 			return <h1>The shortest itinerary is {this.state.numRoutes} flights, and will not be displayed.</h1>
 		} else if (this.state.numRoutes === 2) {
@@ -96,10 +151,12 @@ class RouteSearchPage extends React.Component {
 				<div class = 'container'>	
 				<div class = 'row'>
 					<div class = 'col'>
-						<h3>From: {this.state.routeOne.src} </h3>
+						<h3>1. From: {this.state.routeOne.src} </h3>
 					</div>
 					<div class = 'col'>
-						<h3>Using: {this.state.routeOne.rid} </h3>
+						<h5>Using: {this.state.routeOne.airline} </h5>
+						<h1 class = 'text-center'>✈️</h1>
+						<h5>Plane: {this.state.routeOne.plane} </h5>
 					</div>
 					<div class = 'col'>
 						<h3>To: {this.state.routeOne.tgt} </h3>
@@ -107,10 +164,12 @@ class RouteSearchPage extends React.Component {
 				</div>
 				<div class = 'row'>
 					<div class = 'col'>
-						<h3>From: {this.state.routeTwo.src} </h3>
+						<h3>2. From: {this.state.routeTwo.src} </h3>
 					</div>
 					<div class = 'col'>
-						<h3>Using: {this.state.routeTwo.rid} </h3>
+						<h5>Using: {this.state.routeTwo.airline} </h5>
+						<h1 class = 'text-center'>✈️</h1>
+						<h5>Plane: {this.state.routeTwo.plane} </h5>
 					</div>
 					<div class = 'col'>
 						<h3>To: {this.state.routeTwo.tgt} </h3>
@@ -125,7 +184,9 @@ class RouteSearchPage extends React.Component {
 						<h3>From: {this.state.routeOne.src} </h3>
 					</div>
 					<div class = 'col'>
-						<h3>Using: {this.state.routeOne.rid} </h3>
+						<h5>Using: {this.state.routeOne.airline} </h5>
+						<h1 class = 'text-center'>✈️</h1>
+						<h5>Plane: {this.state.routeOne.plane} </h5>
 					</div>
 					<div class = 'col'>
 						<h3>To: {this.state.routeOne.tgt} </h3>

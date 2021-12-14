@@ -91,9 +91,6 @@ l13 94 280 264 280 264 -3 116 c-4 108 -2 118 20 151 15 21 41 42 70 54 41 17
 			</div>
 				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
 					<h3>Welcome to FlightFinder</h3>
-					
-					There are XX flights, XX planes, XX alliances, XX landmarks available for perusal. 
-
 				</div>
 
 				

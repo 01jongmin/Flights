@@ -51,11 +51,6 @@ const airportColumns = [
 		dataIndex: "lon",
 		key: "lon",
 	},
-    {
-		title: "ALT",
-		dataIndex: "alt",
-		key: "alt",
-	},
 ];
 
 const destinationColumns = [
