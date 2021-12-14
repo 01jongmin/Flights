@@ -43,10 +43,6 @@ pub struct Airport {
     pub icao: Option<String>,
     pub lat: Option<f64>,
     pub lon: Option<f64>,
-    pub alt: Option<i32>,
-    pub timezone: Option<f64>,
-    pub dst: Option<String>,
-    pub tz: Option<String>
 }
 
 #[derive(Queryable, QueryableByName, Serialize, Deserialize, JsonSchema)]
