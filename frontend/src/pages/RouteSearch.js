@@ -1,33 +1,14 @@
 import React from "react";
 import { Table } from "antd";
 import MenuBar from "../components/MenuBar";
-import { getNumRoutes, getRoutes, getCountriesQuery, getAirportsFromCountry, getAirportsFromId, getRouteFromId, getAirlineFromId, getPlanes} from "../fetcher";
+import { getNumRoutes, getRoutes, getCountriesQuery, getAirportsFromCountry, getAirportsFromId, getRouteFromId, getAirlineFromId, getPlanes, getTempFromCity} from "../fetcher";
 import Select from "react-select";
 import "./Dropdown.css";
 import AsyncSelect from "react-select/async";
+import { string } from "shards-react";
 
 const { Column, ColumnGroup } = Table;
 // const { Option } = Select;
-
-const allianceColumns = [
-  {
-    dataIndex: "image",
-    key: "Image",
-    render: (theImageURL) => (
-      <img alt={theImageURL} height="100" src={theImageURL} />
-    ),
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "Name",
-  },
-  {
-    title: "ID",
-    dataIndex: "id",
-    key: "id",
-  },
-];
 
 class RouteSearchPage extends React.Component {
   constructor(props) {
@@ -42,7 +23,9 @@ class RouteSearchPage extends React.Component {
 	  numRoutes: "",
 	  routeOne: {},
 	  routeTwo: {},
-	  intermediate: {}
+	  intermediate: {},
+	  date: 0,
+	  temp: 0
     };
 
 	this.searchForRoute = this.searchForRoute.bind(this);
@@ -50,6 +33,15 @@ class RouteSearchPage extends React.Component {
   }
 
   async searchForRoute() {
+	const today = this.state.date
+	const td = today.getDate()
+	const tm = today.getMonth()
+	today.setDate(today.getDate() + 7)
+	const ed = today.getDate()
+	const em = today.getMonth()
+	await getTempFromCity(this.state.cityTgt, tm, td, em, ed ).then((res) => {
+		this.setState({temp: res[0].average_temp})
+	})
 	await getNumRoutes(this.state.citySrc, this.state.cityTgt).then((res) => {
 		if (res == null || res == undefined || res[0] == undefined) {
 			this.setState({numRoutes : 0})
@@ -137,13 +129,14 @@ class RouteSearchPage extends React.Component {
   }
 
   componentDidMount() {
+	  const date = new Date();
+	  this.setState({date: date})
   }
 
 
   render() {
 
 	const renderRoutes = () => {
-		console.log(this.state.routeOne)
 		if (this.state.numRoutes >= 3) {
 			return <h1>The shortest itinerary is {this.state.numRoutes} flights, and will not be displayed.</h1>
 		} else if (this.state.numRoutes === 2) {
@@ -175,10 +168,12 @@ class RouteSearchPage extends React.Component {
 						<h3>To: {this.state.routeTwo.tgt} </h3>
 					</div>
 				</div>
+				<h5>The average temperature at {this.state.routeTwo.tgt} is {String(this.state.temp).substring(0, 4)}</h5>
 				</div>
 			)
 		} else if (this.state.numRoutes === 1) {
 			return (
+				<div class = 'container'>
 				<div class = 'row'>
 					<div class = 'col'>
 						<h3>From: {this.state.routeOne.src} </h3>
@@ -192,6 +187,8 @@ class RouteSearchPage extends React.Component {
 						<h3>To: {this.state.routeOne.tgt} </h3>
 					</div>
 				</div>
+				<h5>The average temperature at {this.state.routeOne.tgt} is {String(this.state.temp).substring(0, 4)}</h5>
+				</div>
 			)
 		} else if (this.state.numRoutes === 0) {
 			return <h1> No routes! </h1>
@@ -199,6 +196,9 @@ class RouteSearchPage extends React.Component {
 			return 
 		}
 	}
+
+
+
     return (
       <div>
         <MenuBar />
@@ -248,6 +248,8 @@ class RouteSearchPage extends React.Component {
 			</div>
 		{/* </div> */}
 		</div>
+
+
 		{renderRoutes()}
           {/* <Table
 						onRow={(record, rowIndex) => {
