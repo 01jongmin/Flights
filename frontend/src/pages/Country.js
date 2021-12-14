@@ -69,7 +69,7 @@ const destinationColumns = [
 		dataIndex: "count",
 		key: "count",
         sorter: {
-            compare: (a, b) => a.total - b.total,
+            compare: (a, b) => a.count - b.count,
           },
 	}
 ];
