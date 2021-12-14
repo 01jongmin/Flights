@@ -68,6 +68,9 @@ const destinationColumns = [
 		title: "Number of Destination Airports",
 		dataIndex: "count",
 		key: "count",
+        sorter: {
+            compare: (a, b) => a.total - b.total,
+          },
 	}
 ];
 
