@@ -47,6 +47,7 @@ class AirportsPage extends React.Component {
 
 		this.state = {
 			airports: [],
+			airportsFiltered: [],
 			matchesResults: [],
 			matchesPageNumber: 1,
 			matchesPageSize: 10,
@@ -76,11 +77,37 @@ class AirportsPage extends React.Component {
 		});
 	}
 
-	filterByTemperature() {
+	async filterByTemperature() {
 		getAirports(1, 100000).then((res) => {
-			console.log('hi')
 			this.setState({ airports: res });
 		});
+		await getAirportFromWeather(this.state.tempLowQuery, this.state.tempHighQuery).then((res2) => {
+			this.setState({ airportsFiltered: res2 });
+			console.log(this.state.airportsFiltered);
+		});
+		var temp = [];
+		var index = 0;
+		for (var i = 0; i < this.state.airports.length; i++) {
+			for (var j = 0; j < this.state.airportsFiltered.length; j++) {
+				if (this.state.airports[i].id === this.state.airportsFiltered[j].airport_id) {
+					temp[index] = this.state.airports[i];
+					index++;
+				}
+			}
+		}
+
+		// this.state.airports.forEach((airport) => {
+		// 	this.state.airportsFiltered.forEach((fairport) => {
+		// 		if (airport.id === fairport.airport_id) {
+		// 			temp[index] = airport;
+		// 			index++;
+		// 			console.log(index);
+		// 		}
+		// 	})
+		// })
+		this.setState({airports: temp});
+		//console.log(this.state.tempLowQuery);
+		//console.log(this.state.tempHighQuery);
 	  }
 
 	render() {
