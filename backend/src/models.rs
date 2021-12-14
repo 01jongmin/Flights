@@ -1,4 +1,4 @@
-use crate::schema::{AirlineAlliances, Countries, Alliances, Planes, Airports, Landmarks};
+use crate::schema::{AirlineAlliances, Countries, Alliances, Planes, Airports, Landmarks, Routes};
 use serde::{Serialize, Deserialize};
 use schemars::JsonSchema;
 
@@ -54,4 +54,14 @@ pub struct Landmark {
     pub lon: f64,
     pub imageUrl: String,
     pub country: String
+}
+
+#[derive(Queryable, QueryableByName, Serialize, Deserialize, JsonSchema)]
+#[table_name="Routes"]
+pub struct Route {
+    pub id: i32,
+    pub airline_id: i32,
+    pub source_id: i32,
+    pub target_id: i32,
+    pub plane_id: Option<String>
 }
