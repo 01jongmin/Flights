@@ -51,7 +51,7 @@ class RouteSearchPage extends React.Component {
 
   async searchForRoute() {
 	await getNumRoutes(this.state.citySrc, this.state.cityTgt).then((res) => {
-		if (res == null) {
+		if (res == null || res == undefined || res[0] == undefined) {
 			this.setState({numRoutes : 0})
 		} else {
 			this.setState({numRoutes : res[0].distance})
