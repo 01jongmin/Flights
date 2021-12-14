@@ -85,6 +85,9 @@ class AirportsPage extends React.Component {
 			this.setState({ airportsFiltered: res2 });
 			console.log(this.state.airportsFiltered);
 		});
+
+		
+
 		var temp = [];
 		var index = 0;
 		for (var i = 0; i < this.state.airports.length; i++) {
