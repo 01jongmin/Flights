@@ -41,7 +41,6 @@ const airportColumns = [
 ];
 
 
-
 class AirportsPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -53,38 +52,36 @@ class AirportsPage extends React.Component {
 			matchesPageSize: 10,
 			playersResults: [],
 			pagination: null,
-			tempHighQuery: -20,
-            tempLowQuery: 45,
+			tempLowQuery: -20,
+            tempHighQuery: 45,
 		};
 
-		this.leagueOnChange = this.leagueOnChange.bind(this);
 		this.goToAirport = this.goToAirport.bind(this);
 		this.handleTemperatureChange = this.handleTemperatureChange.bind(this)
+		this.filterByTemperature = this.filterByTemperature.bind(this)
 	}
 
 	goToAirport(airportId, airportIata, airportCountry, airportIso) {
 		window.location = `#/airport?id=${airportId}&iata=${airportIata}&country=${airportCountry}&iso=${airportIso}`;
 	}
 
-
 	handleTemperatureChange(value) {
         this.setState({ tempLowQuery: value[0] })
         this.setState({ tempHighQuery: value[1] })
     }
-
-	leagueOnChange(value) {
-		// TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
-		// then, matchesResults in state should be set to the results returned - see a similar function call in componentDidMount()
-		getAirports().then((res) => {
-			this.setState({ airports: res });
-		});
-	}
 
 	componentDidMount() {
 		getAirports(1, 100000).then((res) => {
 			this.setState({ airports: res });
 		});
 	}
+
+	filterByTemperature() {
+		getAirports(1, 100000).then((res) => {
+			console.log('hi')
+			this.setState({ airports: res });
+		});
+	  }
 
 	render() {
 		return (
@@ -116,14 +113,13 @@ class AirportsPage extends React.Component {
 					<label class="d-flex justify-content-center">Temperature (°C)</label>
                     <Slider range defaultValue={[-20, 45]} onChange={this.handleTemperatureChange} style={{ width: '50vw', margin: '0 auto' }} min={-20} max={45}/>
 					<br></br>
-					<button  style={{ justifyContent: 'center' }} onClick={filterByTemperature}>Apply</button>
+					<div class ='text-center' >
+					<button onClick={this.filterByTemperature}>Apply</button>
+					</div>
 				</div>
 			</div>
 		);
 	}
 }
-  function filterByTemperature() {
-	alert('Celsius is wrong!');
-  }
-
+  
 export default AirportsPage;
