@@ -13,7 +13,6 @@ const countryColumns = [
 		title: "Country",
 		dataIndex: "name",
 		key: "name",
-		sorter: (a,b) => a.country.localeCompare(b.country)
 	},
 	{
 		title: "Flag",
