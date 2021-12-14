@@ -27,10 +27,6 @@ table! {
         icao -> Nullable<Char>,
         lat -> Nullable<Double>,
         lon -> Nullable<Double>,
-        alt -> Nullable<Integer>,
-        timezone -> Nullable<Double>,
-        dst -> Nullable<Char>,
-        tz -> Nullable<Varchar>,
     }
 }
 
