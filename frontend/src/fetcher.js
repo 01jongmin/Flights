@@ -161,6 +161,26 @@ const getAirports = async (page, pagesize) => {
   return res.json();
 };
 
+const getNumRoutes = async (src, tgt) => {
+  var res = await fetch(
+    `https://api.flights-550.net/airports/bfs?src_id=${src}&tgt_id=${tgt}&limit=9`,
+    {
+      method: "GET",
+    }
+  );
+  return res.json();
+};
+
+const getRoutes = async (src, limit) => {
+  var res = await fetch(
+    `https://api.flights-550.net/airports/bfs_route?src_id=${src}&limit=${limit}`,
+    {
+      method: "GET",
+    }
+  );
+  return res.json();
+};
+
 export { getAlliances,
 getAirlinesFromAlliance,
 getAirportsFromAlliance, 
@@ -177,5 +197,7 @@ getAirportsFromCountry,
 getPlanespotting,
 getAirportsFromCountryStandard,
 getAirportFromHourLimit,
-getAirportFromId
+getAirportFromId,
+getNumRoutes,
+getRoutes
  };

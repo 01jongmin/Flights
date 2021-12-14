@@ -58,6 +58,7 @@ class CountriesPage extends React.Component {
 				
 				<div style={{ width: "70vw", margin: "0 auto", marginTop: "5vh" }}>
 					<h3>Countries</h3>
+					Click on an Country row to learn more
 					<Table
 						onRow={(record, rowIndex) => {
 							return {
