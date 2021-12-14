@@ -211,6 +211,16 @@ const getAirlineFromId = async(id) => {
   return res.json();
 }
 
+const getTempFromCity= async(city, sm, sd, em, ed) => {
+  var res = await fetch(
+    `https://api.flights-550.net/weather/average_temp?city=${city}&start_m=${sm}&start_d=${sd}&end_m=${em}&end_d=${ed}`,
+    {
+      method: "GET",
+    }
+  );
+  return res.json();
+}
+
 export { getAlliances,
 getAirlinesFromAlliance,
 getAirportsFromAlliance, 
@@ -232,5 +242,6 @@ getNumRoutes,
 getRoutes,
 getAirportsFromId,
 getRouteFromId,
-getAirlineFromId
+getAirlineFromId,
+getTempFromCity,
  };
