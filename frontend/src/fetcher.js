@@ -117,6 +117,26 @@ const getAirportFromWeather = async (low, high) => {
   return res.json();
 };
 
+const getAirportFromHourLimit = async (airport, hours) => {
+  var res = await fetch(
+    `https://api.flights-550.net/airports/distance_limit?airport_id=${airport}&hour_limit=${hours}`,
+    {
+      method: "GET",
+    }
+  );
+  return res.json();
+};
+
+const getAirportFromId = async (id) => {
+  var res = await fetch(
+    `https://api.flights-550.net/airports/id/${id}`,
+    {
+      method: "GET",
+    }
+  );
+  return res.json();
+};
+
 const getPlanes = async () => {
   var res = await fetch(`${prefix}/planes/`, {
     method: "GET",
@@ -155,5 +175,7 @@ getLandmarks,
 getAirportFromWeather,
 getAirportsFromCountry,
 getPlanespotting,
-getAirportsFromCountryStandard
+getAirportsFromCountryStandard,
+getAirportFromHourLimit,
+getAirportFromId
  };
