@@ -71,8 +71,8 @@ jobs:
           context: ./backend
           push: true
           tags: 01jongmin/flights-backend:latest
-          cache-from: type=registry,ref=01jongmin/flights-backend:latest
-          cache-to: type=inline
+          cache-from: type=registry,ref=01jongmin/flights-backend:buildcache
+          cache-to: type=registry,ref=01jongmin/flights-backend:buildcache,mode=max
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v19
         with:
