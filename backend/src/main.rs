@@ -31,7 +31,7 @@ async fn main() {
 
 #[get("/")]
 fn default() -> String {
-    format!("550 backend route")
+    format!("550 backend route 1")
 }
 
 pub fn create_server() -> Rocket<Build> {
