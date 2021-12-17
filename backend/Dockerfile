@@ -3,12 +3,12 @@ FROM rustlang/rust:nightly as builder
 RUN USER=root cargo new --bin flights_backend 
 WORKDIR ./flights_backend
 COPY ./Cargo.toml ./Cargo.toml
-RUN cargo build
 RUN cargo build --release
 RUN rm src/*.rs
 
 ADD src ./src
 
+RUN rm ./target/release/deps/flights_backend*
 RUN cargo build --release
 
 FROM debian:buster-slim
